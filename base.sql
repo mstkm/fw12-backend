@@ -160,7 +160,7 @@ VALUES();
 INSERT INTO "casts" ("name")
 VALUES();
 
-INSERT INTO "movieCats" ("movieId", "castsId")
+INSERT INTO "movieCasts" ("movieId", "castsId")
 VALUES();
 
 INSERT INTO "cinemas" ("picture", "name", "address", "city")
