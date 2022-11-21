@@ -58,7 +58,7 @@ CREATE TABLE "casts" (
     "updatedAt" TIMESTAMPTZ
 );
 
-CREATE TABLE "movieCats" (
+CREATE TABLE "movieCasts" (
     "id"    INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     "movieId" INT,
     "castsId" INT,
