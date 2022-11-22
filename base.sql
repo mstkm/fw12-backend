@@ -142,47 +142,86 @@ CREATE TABLE "subscribers" (
 
 
 -- Memasukan data ke tabel
-INSERT INTO "users" ("picture", "firstName", "lastName", "phoneNumber", "email", "password")
-VALUES();
+INSERT INTO "users"
+("picture", "firstName", "lastName", "phoneNumber", "email", "password")
+VALUES
+('C:\Users\62813\Downloads\clouds-1846760_1280.jpg', 'Super', 'Admin', '08123456789', 'admin@mail', '1234');
 
-INSERT INTO "resetPassword" ("email", "userId", "code")
-VALUES();
+INSERT INTO "resetPassword"
+("email", "userId", "code")
+VALUES
+('admin@mail', 1, '001122');
 
-INSERT INTO "movies" ("title", "picture", "releaseDate", "director", "duration", "synopsis")
-VALUES();
+INSERT INTO "movies"
+("title", "picture", "releaseDate", "director", "duration", "synopsis")
+VALUES('Tenet', 'https://m.media-amazon.com/images/M/MV5BYzg0NGM2NjAtNmIxOC00MDJmLTg5ZmYtYzM0MTE4NWE2NzlhXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_SX300.jpg', '03 Sep 2020', 'Christopher Nolan', '02:30:00', 'In a twilight world of international espionage, an unnamed CIA operative, known as The Protagonist, is recruited by a mysterious organization called Tenet to participate in a global assignment that unfolds beyond real time. The mission: prevent Andrei Sator, a renegade Russian oligarch with precognition abilities, from starting World War III. The Protagonist will soon master the art of \"time inversion\" as a way of countering the threat that is to come.');
 
-INSERT INTO "genre" ("name")
-VALUES();
+INSERT INTO "genre"
+("name")
+VALUES
+('Action'),
+('Sci-Fi'),
+('Thriller');
 
-INSERT INTO "movieGenre" ("movieId", "genreId")
-VALUES();
+INSERT INTO "movieGenre"
+("movieId", "genreId")
+VALUES
+(1, 1),
+(1, 2),
+(1, 3);
 
-INSERT INTO "casts" ("name")
-VALUES();
+INSERT INTO "casts"
+("name")
+VALUES
+('John David Washington'),
+('Robert Pattinson'),
+('Elizabeth Debicki');
 
-INSERT INTO "movieCasts" ("movieId", "castsId")
-VALUES();
+INSERT INTO "movieCasts"
+("movieId", "castsId")
+VALUES
+(1, 1),
+(1, 2),
+(1, 3);
 
-INSERT INTO "cinemas" ("picture", "name", "address", "city")
-VALUES();
+INSERT INTO "cinemas"
+("picture", "name", "address", "city")
+VALUES
+('C:\Users\62813\Desktop\fw12-responsive-web\assets\ebv.id.png', 'ebv.id', 'Whatever street No.12, South Purwokerto', 'Purwokerto');
 
-INSERT INTO "movieSchedule" ("movieId", "cinemaId", "price", "startDate", "endDate")
-VALUES();
+INSERT INTO "movieSchedule"
+("movieId", "cinemaId", "price", "startDate", "endDate")
+VALUES
+(1, 1, 30000, '2022-11-01', '2023-02-01');
 
-INSERT INTO "movieScheduleTimes" ("time", "movieScheduleId")
-VALUES();
+INSERT INTO "movieScheduleTimes"
+("time", "movieScheduleId")
+VALUES
+('20:00:00', 1);
 
-INSERT INTO "status" ("nama")
-VALUES();
+INSERT INTO "status"
+("nama")
+VALUES
+('Active'),
+('Already Used'),
+('Expired');
 
-INSERT INTO "transactions" ("bookingDate", "movieId", "cinemaId", "movieScheduleId", "fullName", "email", "phoneNumber", "statusId")
-VALUES();
+INSERT INTO "transactions"
+("bookingDate", "movieId", "cinemaId", "movieScheduleId", "fullName", "email", "phoneNumber", "statusId")
+VALUES
+('2022-11-22', 1, 1, 1, 'Mugi Mustakim', 'mugi@mail.com', '081222333444', 1);
 
-INSERT INTO "reservedSeat" ("seatNum", "transactionId")
-VALUES();
+INSERT INTO "reservedSeat"
+("seatNum", "transactionId")
+VALUES
+('A1', 1);
 
-INSERT INTO "paymentMethod" ("picture", "name")
-VALUES();
+INSERT INTO "paymentMethod"
+("picture", "name")
+VALUES
+('C:\Users\62813\Desktop\fw12-responsive-web\assets\bri.png', 'BRI');
 
-INSERT INTO "subscribers" ("email")
-VALUES();
+INSERT INTO "subscribers"
+("email")
+VALUES
+('mugi@mail.com');
