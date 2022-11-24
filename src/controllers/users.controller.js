@@ -1,34 +1,56 @@
-exports.readAllUsers = (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: 'List data of users on /users'
-  })
-}
+const {createUserModel, readAllUserModel, readUserModel, updateUserModel, deleteUserModel} = require('../models/users.model')
 
-exports.readUser = (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: 'Detail user'
-  })
-}
-
+// Controller kirim ke route
+// Membuat data user (Create)
 exports.createUser = (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: 'User created successfully'
+  createUserModel(req.body, results => {
+    return res.status(200).json({
+      success: true,
+      message: 'User created successfully',
+      results
+    })
   })
 }
 
+// Membaca data user (Read)
+exports.readAllUsers = (req, res) => {
+  readAllUserModel(results => {
+    return res.status(200).json({
+      success: true,
+      message: 'List data of users on /users',
+      results
+    })
+  })
+}
+// Membaca data user berdasarkan id (Read)
+exports.readUser = (req, res) => {
+  readUserModel(req.params.id, results => {
+    return res.status(200).json({
+      success: true,
+      message: 'Detail user',
+      results
+    })
+  })
+}
+
+// Mengupdate data user (Update)
 exports.updateUser = (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: 'User update successfully'
+  updateUserModel(req.params.id, req.body, results => {
+    return res.status(200).json({
+      success: true,
+      message: 'User update successfully',
+      results
+    })
   })
 }
 
+// Menghapus data user (Delete)
 exports.deleteUser = (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: 'Delete user successfully'
+  deleteUserModel(req.params.id, results => {
+    return res.status(200).json({
+      success: true,
+      message: 'Delete user successfully',
+      results
+    })
   })
 }
