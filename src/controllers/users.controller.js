@@ -1,34 +1,72 @@
-exports.readAllUsers = (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: 'List data of users on /users'
-  })
-}
+const {createUserModel, readAllUserModel, readUserModel, updateUserModel, deleteUserModel} = require('../models/users.model')
+const errorHandler = require('../helpers/errorHandler.helper')
 
-exports.readUser = (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: 'Detail user'
-  })
-}
-
+// Controller kirim ke route
+// Membuat data user (Create)
 exports.createUser = (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: 'User created successfully'
+  createUserModel(req.body, (err, data) => {
+    if (err) {
+      return errorHandler(err, res);
+    }
+    return res.status(200).json({
+      success: true,
+      message: 'User created successfully',
+      results: data.rows[0]
+    })
   })
 }
 
+// Membaca data user (Read)
+exports.readAllUsers = (req, res) => {
+  readAllUserModel((err, data) => {
+    if(err) {
+      return errorHandler(err, res);
+    }
+    return res.status(200).json({
+      success: true,
+      message: 'List data of users on /users',
+      results: data.rows
+    })
+  })
+}
+// Membaca data user berdasarkan id (Read)
+exports.readUser = (req, res) => {
+  readUserModel(req.params.id, (err, data) => {
+    if (err) {
+      return errorHandler(err, res);
+    }
+    return res.status(200).json({
+      success: true,
+      message: 'Detail user',
+      results: data.rows
+    })
+  })
+}
+
+// Mengupdate data user (Update)
 exports.updateUser = (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: 'User update successfully'
+  updateUserModel(req.params.id, req.body, (err, data) => {
+    if (err) {
+      return errorHandler(err, res);
+    }
+    return res.status(200).json({
+      success: true,
+      message: 'User update successfully',
+      results: data.rows
+    })
   })
 }
 
+// Menghapus data user (Delete)
 exports.deleteUser = (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: 'Delete user successfully'
+  deleteUserModel(req.params.id, (err, data) => {
+    if (err) {
+      return errorHandler(err, res);
+    }
+    return res.status(200).json({
+      success: true,
+      message: 'Delete user successfully',
+      results: data.rows
+    })
   })
 }
