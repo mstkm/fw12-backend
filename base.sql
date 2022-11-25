@@ -225,3 +225,10 @@ INSERT INTO "subscribers"
 ("email")
 VALUES
 ('mugi@mail.com');
+
+
+-- ALTER
+ALTER TABLE "users" ADD CONSTRAINT "email" UNIQUE ("email");
+
+ALTER TABLE "genre" ADD CONSTRAINT "name" UNIQUE ("name");
+

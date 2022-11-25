@@ -1,18 +1,20 @@
 // Import modules
 const express = require('express')
 const db = require('./src/helpers/db.helper')
+const {readAllUsers} = require('./src/controllers/users.controller')
 
 const app = express()
 
 // untuk membaca body dari request method
-app.use(express.json())
+// app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 // terhubung ke index routes
 app.use('/', require('./src/routes'))
 
-
+// menampilkan data ke browser
 app.get ('/', (req, res) => {
+  // return readAllUsers(req, res)
   return res.status(200).json({
     success: true,
     message: 'Backend is running well'
