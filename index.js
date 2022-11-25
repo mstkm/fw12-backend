@@ -1,7 +1,5 @@
 // Import modules
 const express = require('express')
-const db = require('./src/helpers/db.helper')
-const {readAllUsers} = require('./src/controllers/users.controller')
 
 const app = express()
 
@@ -12,9 +10,7 @@ app.use(express.urlencoded({extended: false}))
 // terhubung ke index routes
 app.use('/', require('./src/routes'))
 
-// menampilkan data ke browser
 app.get ('/', (req, res) => {
-  // return readAllUsers(req, res)
   return res.status(200).json({
     success: true,
     message: 'Backend is running well'
@@ -23,5 +19,5 @@ app.get ('/', (req, res) => {
 
 // menjalankan aplikasi
 app.listen(8888, () => {
-  console.log(`App listening on port 8888`)
+  console.log('App listening on port 8888')
 })
