@@ -6,7 +6,7 @@ const {readAllUsers} = require('./src/controllers/users.controller')
 const app = express()
 
 // untuk membaca body dari request method
-// app.use(express.json())
+app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 // terhubung ke index routes
