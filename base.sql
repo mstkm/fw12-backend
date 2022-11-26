@@ -260,9 +260,9 @@ ALTER TABLE "movieSchedule" ADD CONSTRAINT "fk_movieId" FOREIGN KEY ("movieId") 
 
 ALTER TABLE "movieSchedule" ADD CONSTRAINT "fk_cinemaId" FOREIGN KEY ("cinemaId") REFERENCES "cinemas" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE "movieScheduleTimes" ADD CONSTRAINT "fk_movieScheduleId" FOREIGN KEY ("movieScheduleId") REFERENCES "movieSchedule" (id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "movieScheduleTimes" ADD CONSTRAINT "fk_movieScheduleId" FOREIGN KEY ("movieScheduleId") REFERENCES "movieSchedule" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE "reservedSeat" ADD CONSTRAINT "fk_transactionId" FOREIGN KEY ("transactionId") REFERENCES "transactions" (id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "reservedSeat" ADD CONSTRAINT "fk_transactionId" FOREIGN KEY ("transactionId") REFERENCES "transactions" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE "resetPassword" ADD CONSTRAINT "fk_userId" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
