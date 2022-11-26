@@ -22,7 +22,7 @@ exports.readGenreModel = (id, cb) => {
 
 // Mengupdate data genre (Update)
 exports.updateGenreModel = (id, data, cb) => {
-  const sql = 'UPDATE genre SET "name"=$1 WHERE "id"=$2 RETURNING *';
+  const sql = `UPDATE genre SET "name"=COALESCE(NULLIF($1, ''), "name") WHERE "id"=$2 RETURNING *`;
   const value = [data.name, id];
   db.query(sql, value, cb);
 }

@@ -22,8 +22,8 @@ exports.readMovieCastModel = (id, cb) => {
 
 // Mengupdate data movieCast (Update)
 exports.updateMovieCastModel = (id, data, cb) => {
-  const sql = 'UPDATE "movieCasts" SET "movieId"=$1, "castsId"=$2 WHERE "id"=$3 RETURNING *';
-  const value = [data.movieId, data.castsId, id];
+  const sql = `UPDATE "movieCasts" SET "movieId"=COALESCE(NULLIF($1, 0), "movieId"), "castsId"=COALESCE(NULLIF($2, 0), "castsId") WHERE "id"=$3 RETURNING *`;
+  const value = [Number(data.movieId), Number(data.castsId), id];
   db.query(sql, value, cb);
 }
 

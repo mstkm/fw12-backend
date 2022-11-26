@@ -22,7 +22,7 @@ exports.readUserModel = (id, cb) => {
 
 // Mengupdate data user (Update)
 exports.updateUserModel = (id, data, cb) => {
-  const sql = 'UPDATE users SET "picture"=$1, "firstName"=$2, "lastName"=$3, "phoneNumber"=$4, "email"=$5, "password"=$6 WHERE id=$7 RETURNING *'
+  const sql = `UPDATE users SET "picture"=COALESCE(NULLIF($1, ''), "picture"), "firstName"=COALESCE(NULLIF($2, ''), "firstName"), "lastName"=COALESCE(NULLIF($3, ''), "lastName"), "phoneNumber"=COALESCE(NULLIF($4, ''), "phoneNumber"), "email"=COALESCE(NULLIF($5, ''), "email"), "password"=COALESCE(NULLIF($6, ''), "password") WHERE id=$7 RETURNING *`
   const value = [data.picture, data.firstName, data.lastName, data.phoneNumber, data.email, data.password, id]
   db.query(sql, value, cb);
 }

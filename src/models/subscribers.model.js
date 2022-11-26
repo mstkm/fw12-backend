@@ -21,7 +21,7 @@ exports.readSubscriberModel = (id, cb) => {
 
 // Mengupdate data subscriber (Update)
 exports.updateSubscriberModel = (id, data, cb) => {
-  const sql = 'UPDATE "subscribers" SET "email"=$1 WHERE "id"=$2 RETURNING *';
+  const sql = `UPDATE "subscribers" SET "email"=COALESCE(NULLIF($1, ''), "email") WHERE "id"=$2 RETURNING *`;
   const value = [data.email, id];
   db.query(sql, value, cb);
 }

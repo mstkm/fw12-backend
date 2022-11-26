@@ -17,12 +17,6 @@ const errorHandler = (err, res) => {
       message: 'Invalid input for date'
     })
   }
-  if (err.message.includes('syntax for type time')) {
-    return res.status(400).json({
-      success: false,
-      message: 'Invalid input for time'
-    })
-  }
   if (err.message.includes('violates foreign key')) {
     if (err.message.includes('fk_movieId') || err.message.includes('movieId')) {
       return res.status(400).json({

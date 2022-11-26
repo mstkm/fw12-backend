@@ -22,8 +22,8 @@ exports.readMovieGenreModel = (id, cb) => {
 
 // Mengupdate data movieGenre (Update)
 exports.updateMovieGenreModel = (id, data, cb) => {
-  const sql = 'UPDATE "movieGenre" SET "movieId"=$1, "genreId"=$2 WHERE "id"=$3 RETURNING *'
-  const value = [data.movieId, data.genreId, id];
+  const sql = 'UPDATE "movieGenre" SET "movieId"=COALESCE(NULLIF($1, 0), "movieId"), "genreId"=COALESCE(NULLIF($2, 0), "genreId") WHERE "id"=$3 RETURNING *'
+  const value = [Number(data.movieId), Number(data.genreId), id];
   db.query(sql, value, cb);
 }
 

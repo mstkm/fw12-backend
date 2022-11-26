@@ -22,7 +22,7 @@ exports.readCastModel = (id, cb) => {
 
 // Mengupdate data cast (Update)
 exports.updateCastModel = (id, data, cb) => {
-  const sql = 'UPDATE casts SET "name"=$1 WHERE "id"=$2 RETURNING*';
+  const sql = `UPDATE casts SET "name"=COALESCE(NULLIF($1, ''), "name") WHERE "id"=$2 RETURNING*`;
   const value = [data.name, id];
   db.query(sql, value, cb);
 }

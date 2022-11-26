@@ -22,7 +22,7 @@ exports.readPaymentMethodModel = (id, cb) => {
 
 // Mengupdate data paymentMethod (Update)
 exports.updatePaymentMethodModel = (id, data, cb) => {
-  const sql = 'UPDATE "paymentMethod" SET "picture"=$1, "name"=$2 WHERE "id"=$3 RETURNING *';
+  const sql = `UPDATE "paymentMethod" SET "picture"=COALESCE(NULLIF($1, ''), "picture"), "name"=COALESCE(NULLIF($2, ''), "name") WHERE "id"=$3 RETURNING *`;
   const value = [data.picture, data.name, id];
   db.query(sql, value, cb);
 }

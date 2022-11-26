@@ -21,7 +21,7 @@ exports.readStatusModel = (id, cb) => {
 
 // Mengupadte data status (Update)
 exports.updateStatusModel = (id, data, cb) => {
-  const sql = 'UPDATE "status" SET "nama"=$1 WHERE "id"=$2 RETURNING *';
+  const sql = `UPDATE "status" SET "nama"=COALESCE(NULLIF($1, ''), "nama") WHERE "id"=$2 RETURNING *`;
   const value = [data.nama, id];
   db.query(sql, value, cb);
 }

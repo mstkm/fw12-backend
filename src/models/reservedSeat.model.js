@@ -21,8 +21,8 @@ exports.readReservedSeatModel = (id, cb) => {
 
 // Mengupdate data reservedSeat (Update)
 exports.updateReservedSeatModel = (id, data, cb) => {
-  const sql = 'UPDATE "reservedSeat" SET "seatNum"=$1, "transactionId"=$2 WHERE "id"=$3 RETURNING *';
-  const value = [data.seatNum, data.transactionId, id];
+  const sql = `UPDATE "reservedSeat" SET "seatNum"=COALESCE(NULLIF($1, ''), "seatNum"), "transactionId"=COALESCE(NULLIF($2, 0), "transactionId") WHERE "id"=$3 RETURNING *`;
+  const value = [data.seatNum, Number(data.transactionId), id];
   db.query(sql, value, cb);
 }
 

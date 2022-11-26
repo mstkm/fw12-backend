@@ -22,7 +22,14 @@ exports.readMovieModel = (id, cb) => {
 
 // Mengupdate data movie (Update)
 exports.updateMovieModel = (id, data, cb) => {
-  const sql = 'UPDATE "movies" SET "title"=$1, "picture"=$2, "releaseDate"=$3, "director"=$4, "duration"=$5, "synopsis"=$6 WHERE "id"=$7 RETURNING *';
+  const sql = `UPDATE "movies" SET
+  "title"=COALESCE(NULLIF($1, ''), "title"),
+  "picture"=COALESCE(NULLIF($2, ''), "picture"),
+  "releaseDate"=$3,
+  "director"=COALESCE(NULLIF($4, ''), "director"),
+  "duration"=$5,
+  "synopsis"=COALESCE(NULLIF($6, ''), "synopsis")
+  WHERE "id"=$7 RETURNING *`;
   const value = [data.title, data.picture, data.releaseDate, data.director, data.duration, data.synopsis, id];
   db.query(sql, value, cb);
 }
