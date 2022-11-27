@@ -1,5 +1,6 @@
-const {createTransactionModel, readAllTransactionModel, readTransactionModel, updateTransactionModel, deleteTransactionModel} = require('../models/transactions.model')
+const {createTransactionModel, readAllTransactionModel, countTransactionsModel, readTransactionModel, updateTransactionModel, deleteTransactionModel} = require('../models/transactions.model')
 const errorHandler = require('../helpers/errorHandler.helper')
+const filter = require('../helpers/filter.helper')
 
 // Membuat data transaction (Create)
 exports.createTransaction = (req, res) => {
@@ -17,14 +18,18 @@ exports.createTransaction = (req, res) => {
 
 // Membaca data transactions (Read)
 exports.readAllTransaction = (req, res) => {
-  readAllTransactionModel((err, data) => {
-    if (err) {
-      return errorHandler(err, res);
-    }
-    return res.status(200).json({
-      success: true,
-      message: 'List data of transaction',
-      results: data.rows
+  const sortable = ['fullName', "email", "phoneNumber", "statusId", "createdAt", "updatedAt"];
+  filter(req.query, sortable, countTransactionsModel, res, (filter, pageInfo) => {
+    readAllTransactionModel(filter, (err, data) => {
+      if (err) {
+        return errorHandler(err, res);
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'List data of transaction',
+        pageInfo,
+        results: data.rows
+      })
     })
   })
 }

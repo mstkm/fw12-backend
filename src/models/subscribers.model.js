@@ -8,10 +8,19 @@ exports.createSubscriberModel = (data, cb) => {
 }
 
 // Membaca data subscribers (Read)
-exports.readAllSubscriberModel = (cb) => {
-  const sql = 'SELECT * FROM "subscribers"';
-  db.query(sql, cb);
+exports.readAllSubscriberModel = (filter, cb) => {
+  const sql = `SELECT * FROM "subscribers" WHERE email LIKE $3 ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`;
+  const value = [filter.limit, filter.offset, `%${filter.search}%`]
+  db.query(sql, value, cb);
 }
+
+// Menghitung total data subscribers
+exports.countSubscribersModel = (filter, cb) => {
+  const sql = `SELECT COUNT("email") AS "totalData" FROM "subscribers" WHERE email LIKE $1`;
+  const value = [`%${filter.search}%`]
+  db.query(sql, value, cb)
+}
+
 // Membaca data subscribers berdasarkan id (Read)
 exports.readSubscriberModel = (id, cb) => {
   const sql = 'SELECT * FROM "subscribers" WHERE "id"=$1';

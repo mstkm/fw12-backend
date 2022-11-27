@@ -9,10 +9,19 @@ exports.createMovieModel = (data, cb) => {
 }
 
 // Membaca data movies (Read)
-exports.readAllMoviesModel = (cb) => {
-  const sql = 'SELECT * FROM movies';
-  db.query(sql, cb);
+exports.readAllMoviesModel = (filter, cb) => {
+  const sql = `SELECT * FROM movies WHERE title LIKE $3 ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`;
+  const value = [filter.limit, filter.offset, `%${filter.search}%`]
+  db.query(sql, value, cb);
 }
+
+// Menghitung total data movies
+exports.countMoviesModel = (filter, cb) => {
+  const sql = `SELECT COUNT("title") AS "totalData" FROM movies WHERE title LIKE $1`;
+  const value = [`%${filter.search}%`]
+  db.query(sql, value, cb)
+}
+
 // Membaca data movie berdasarakan id (Read)
 exports.readMovieModel = (id, cb) => {
   const sql = 'SELECT * FROM movies WHERE "id"=$1';

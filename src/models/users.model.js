@@ -9,10 +9,19 @@ exports.createUserModel = (data, cb) => {
 }
 
 // Membaca data semua user (Read)
-exports.readAllUserModel = (cb) => {
-  const sql = 'SELECT * FROM users';
-  db.query(sql, cb);
+exports.readAllUserModel = (filter, cb) => {
+  const sql = `SELECT * FROM users WHERE "firstName" LIKE $3 ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`;
+  const value = [filter.limit, filter.offset, `%${filter.search}%`]
+  db.query(sql, value, cb);
 }
+
+// Menghitung total data users
+exports.countUsersModel = (filter, cb) => {
+  const sql = `SELECT COUNT("firstName") AS "totalData" FROM users WHERE "firstName" LIKE $1`;
+  const value = [`%${filter.search}%`]
+  db.query(sql, value, cb)
+}
+
 // Membaca data user berdasarkan id (Read)
 exports.readUserModel = (id, cb) => {
   const sql = 'SELECT * FROM users WHERE id=$1';

@@ -9,10 +9,19 @@ exports.createCastModel = (data, cb) => {
 }
 
 // Membaca data semua casts (Read)
-exports.readAllCastsModel = (cb) => {
-  const sql = 'SELECT * FROM casts';
-  db.query(sql, cb);
+exports.readAllCastsModel = (filter, cb) => {
+  const sql = `SELECT * FROM casts WHERE name LIKE $3 ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`;
+  const value = [filter.limit, filter.offset, `%${filter.search}%`]
+  db.query(sql, value, cb);
 }
+
+// Menghitung total data casts
+exports.countCastsModel = (filter, cb) => {
+  const sql = `SELECT COUNT("name") AS "totalData" FROM casts WHERE name LIKE $1`;
+  const value = [`%${filter.search}%`]
+  db.query(sql, value, cb)
+}
+
 // Membaca data casts berdasarkan id (Read)
 exports.readCastModel = (id, cb) => {
   const sql = 'SELECT * FROM casts WHERE id=$1';

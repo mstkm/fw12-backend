@@ -9,9 +9,17 @@ exports.createCinemaModel = (data, cb) => {
 }
 
 // Membaca semua data cinemas (Read)
-exports.readAllCinemasModel = (cb) => {
-  const sql = 'SELECT * FROM cinemas';
-  db.query(sql, cb);
+exports.readAllCinemasModel = (filter, cb) => {
+  const sql = `SELECT * FROM cinemas WHERE name LIKE $3 ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`;
+  const value = [filter.limit, filter.offset, `%${filter.search}%`];
+  db.query(sql, value, cb);
+}
+
+// Menghitung total data cinemas
+exports.countCinemasModel = (filter, cb) => {
+  const sql = `SELECT COUNT("name") AS "totalData" FROM cinemas WHERE name LIKE $1`;
+  const value = [`%${filter.search}%`]
+  db.query(sql, value, cb)
 }
 
 // Membaca data cinema berdasarkan id (Read)

@@ -8,10 +8,19 @@ exports.createTransactionModel = (data, cb) => {
 }
 
 // Membaca data transactions (Read)
-exports.readAllTransactionModel = (cb) => {
-  const sql = 'SELECT * FROM "transactions"';
-  db.query(sql, cb);
+exports.readAllTransactionModel = (filter, cb) => {
+  const sql = `SELECT * FROM "transactions" WHERE "fullName" LIKE $3 ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`;
+  const value = [filter.limit, filter.offset, `%${filter.search}%`]
+  db.query(sql, value, cb);
 }
+
+// Menghitung total data casts
+exports.countTransactionsModel = (filter, cb) => {
+  const sql = `SELECT COUNT("fullName") AS "totalData" FROM "transactions" WHERE "fullName" LIKE $1`;
+  const value = [`%${filter.search}%`]
+  db.query(sql, value, cb)
+}
+
 // Membaca data transactions berdsarakan id (Read)
 exports.readTransactionModel = (id, cb) => {
   const sql = 'SELECT * FROM "transactions" WHERE "id"=$1';

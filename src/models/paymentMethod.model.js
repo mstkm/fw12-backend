@@ -9,10 +9,19 @@ exports.createPaymentMethodModel = (data, cb) => {
 }
 
 // Membaca data paymentMethod (Read)
-exports.readAllPaymentMethodModel = (cb) => {
-  const sql = 'SELECT * FROM "paymentMethod"';
-  db.query(sql, cb);
+exports.readAllPaymentMethodModel = (filter, cb) => {
+  const sql = `SELECT * FROM "paymentMethod" WHERE name LIKE $3 ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`;
+  const value = [filter.limit, filter.offset, `%${filter.search}%`]
+  db.query(sql, value, cb);
 }
+
+// Menghitung total data paymentMethod
+exports.countPaymentMethodModel = (filter, cb) => {
+  const sql = `SELECT COUNT("name") AS "totalData" FROM "paymentMethod" WHERE name LIKE $1`;
+  const value = [`%${filter.search}%`]
+  db.query(sql, value, cb)
+}
+
 // Membaca data paymentMethod berdasarkan id (Read)
 exports.readPaymentMethodModel = (id, cb) => {
   const sql = 'SELECT * FROM "paymentMethod" WHERE "id"=$1';

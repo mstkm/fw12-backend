@@ -1,5 +1,6 @@
-const {createMovieModel, readAllMoviesModel, readMovieModel, updateMovieModel, deleteMovieModel} = require('../models/movies.model')
+const {createMovieModel, readAllMoviesModel, countMoviesModel, readMovieModel, updateMovieModel, deleteMovieModel} = require('../models/movies.model')
 const errorHandler = require('../helpers/errorHandler.helper')
+const filter = require('../helpers/filter.helper')
 
 // Controller kirim ke route
 // Membuata data movie (Create)
@@ -18,14 +19,18 @@ exports.createMovie = (req, res) => {
 
 // Membaca data movies (Read)
 exports.readAllMovies = (req, res) => {
-  readAllMoviesModel((err, data) => {
-    if (err) {
-      return errorHandler(err, res);
-    }
-    return res.status(200).json({
-      success: true,
-      message: 'List data of movies',
-      results: data.rows
+  const sortable = ['title', 'director', 'createdAt', 'updatedAt']
+  filter(req.query, sortable, countMoviesModel, res, (filter, pageInfo) => {
+    readAllMoviesModel(filter, (err, data) => {
+      if (err) {
+        return errorHandler(err, res);
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'List data of movies',
+        pageInfo,
+        results: data.rows
+      })
     })
   })
 }

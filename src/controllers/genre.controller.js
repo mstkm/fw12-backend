@@ -1,5 +1,6 @@
-const {createGenreModel, readAllGenresModel, readGenreModel, updateGenreModel, deleteGenreModel} = require('../models/genre.model')
+const {createGenreModel, readAllGenresModel, readGenreModel, countGenresModel, updateGenreModel, deleteGenreModel} = require('../models/genre.model')
 const errorHandler = require('../helpers/errorHandler.helper')
+const filter = require('../helpers/filter.helper')
 
 // Controller kirim ke route
 // Membuat data genre (Create)
@@ -18,14 +19,18 @@ exports.createGenre = (req, res) => {
 
 // Membaca data semua genres (Read)
 exports.readAllGenres = (req, res) => {
-  readAllGenresModel((err, data) => {
-    if (err) {
-      return errorHandler(err, res);
-    }
-    return res.status(200).json({
-      success: true,
-      message: 'List of genre',
-      results: data.rows
+  const sortable = ['name', 'createdAt', 'updatedAt'];
+  filter (req.query, sortable, countGenresModel, res, (filter, pageInfo) => {
+    readAllGenresModel(filter, (err, data) => {
+      if (err) {
+        return errorHandler(err, res);
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'List of genre',
+        pageInfo,
+        results: data.rows
+      })
     })
   })
 }

@@ -1,5 +1,6 @@
-const {createSubscriberModel, readAllSubscriberModel, readSubscriberModel, updateSubscriberModel, deleteSubscriberModel} = require('../models/subscribers.model')
-const errorHandler = require('../helpers/errorHandler.helper')
+const {createSubscriberModel, readAllSubscriberModel, countSubscribersModel, readSubscriberModel, updateSubscriberModel, deleteSubscriberModel} = require('../models/subscribers.model')
+const errorHandler = require('../helpers/errorHandler.helper');
+const filter = require('../helpers/filter.helper');
 
 // Membuat data subscriber (Create)
 exports.createSubscriber = (req, res) => {
@@ -17,14 +18,18 @@ exports.createSubscriber = (req, res) => {
 
 // Membaca data subscribers (Read)
 exports.readAllSubscriber = (req, res) => {
-  readAllSubscriberModel((err, data) => {
-    if (err) {
-      return errorHandler(err, res);
-    }
-    return res.status(200).json({
-      success: true,
-      message: 'List of subscriber',
-      results: data.rows
+  const sortable = ['email', 'createdAt', 'updatedAt'];
+  filter(req.query, sortable, countSubscribersModel, res, (filter, pageInfo) => {
+    readAllSubscriberModel(filter, (err, data) => {
+      if (err) {
+        return errorHandler(err, res);
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'List of subscriber',
+        pageInfo,
+        results: data.rows
+      })
     })
   })
 }

@@ -1,5 +1,6 @@
-const {createPaymentMethodModel, readAllPaymentMethodModel, readPaymentMethodModel, updatePaymentMethodModel, deletePaymentMethodModel} = require('../models/paymentMethod.model')
-const errorHandler = require('../helpers/errorHandler.helper')
+const {createPaymentMethodModel, readAllPaymentMethodModel, countPaymentMethodModel, readPaymentMethodModel, updatePaymentMethodModel, deletePaymentMethodModel} = require('../models/paymentMethod.model')
+const errorHandler = require('../helpers/errorHandler.helper');
+const filter = require('../helpers/filter.helper');
 
 
 // Membuat data paymentMethod (Create)
@@ -18,14 +19,18 @@ exports.createPaymentMethod = (req, res) => {
 
 // Membaca data paymentMethod (Read)
 exports.readAllPaymentMethod = (req, res) => {
-  readAllPaymentMethodModel((err, data) => {
-    if (err) {
-      return errorHandler(err, res);
-    }
-    return res.status(200).json({
-      success: true,
-      message: 'List data of Payment Method',
-      results: data.rows
+  const sortable = ['name', 'createdAt', 'updatedAt'];
+  filter(req.query, sortable, countPaymentMethodModel, res, (filter, pageInfo) => {
+    readAllPaymentMethodModel(filter, (err, data) => {
+      if (err) {
+        return errorHandler(err, res);
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'List data of Payment Method',
+        pageInfo,
+        results: data.rows
+      })
     })
   })
 }

@@ -1,5 +1,6 @@
-const {createCastModel, readAllCastsModel, readCastModel, updateCastModel, deleteCastModel} = require('../models/casts.model')
-const errorHandler = require('../helpers/errorHandler.helper')
+const {createCastModel, readAllCastsModel, countCastsModel, readCastModel, updateCastModel, deleteCastModel} = require('../models/casts.model')
+const errorHandler = require('../helpers/errorHandler.helper');
+const filter = require('../helpers/filter.helper');
 
 // Controller kirim ke route
 // Membuat data cast (Create)
@@ -18,14 +19,18 @@ exports.createCast = (req, res) => {
 
 // Membaca semua data casts (Read)
 exports.readAllCasts = (req, res) => {
-  readAllCastsModel((err, data) => {
-    if (err) {
-      return errorHandler(err, res);
-    }
-    return res.status(200).json({
-      success: true,
-      message: 'List data of casts on /casts',
-      results: data.rows
+  const sortable = ['name', 'createdAt', 'updatedAt'];
+  filter(req.query, sortable, countCastsModel, res, (filter, pageInfo) => {
+    readAllCastsModel(filter, (err, data) => {
+      if (err) {
+        return errorHandler(err, res);
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'List data of casts on /casts',
+        pageInfo,
+        results: data.rows
+      })
     })
   })
 }
