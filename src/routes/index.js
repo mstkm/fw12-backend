@@ -1,4 +1,5 @@
 const routes = require('express').Router()
+const {authMiddleware} = require('../middleware/auth.middleware')
 
 // Route user
 routes.use('/users', require('./users.router'))
@@ -33,8 +34,8 @@ routes.use('/movieScheduleTimes', require('./movieScheduleTimes.router'))
 routes.use('/movieScheduleTimes/:id', require('./movieScheduleTimes.router'))
 
 // Route movies
-routes.use('/movies', require('./movies.router'))
-routes.use('/movies/:id', require('./movies.router'))
+routes.use('/movies', authMiddleware, require('./movies.router'))
+routes.use('/movies/:id', authMiddleware, require('./movies.router'))
 
 // Route paymentMethod
 routes.use('/paymentMethod', require('./paymentMethod.router'))
@@ -59,5 +60,8 @@ routes.use('/subscribers/:id', require('./subscribers.router'))
 // Route transactions
 routes.use('/transactions', require('./transactions.router'))
 routes.use('/transactions/:id', require('./transactions.router'))
+
+// Route auth
+routes.use('/auth', require('./auth.router'))
 
 module.exports = routes
