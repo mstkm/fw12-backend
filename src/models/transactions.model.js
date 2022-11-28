@@ -30,8 +30,8 @@ exports.readTransactionModel = (id, cb) => {
 
 // Mengupdate data transaction (Update)
 exports.updateTransactionModel = (id, data, cb) => {
-  const sql = `UPDATE "transactions" SET "bookingDate"=$1, "movieId"=COALESCE(NULLIF($2, 0), "movieId"), "cinemaId"=COALESCE(NULLIF($3, 0), "cinemaId"), "movieScheduleId"=COALESCE(NULLIF($4, 0), "movieScheduleId"), "fullName"=COALESCE(NULLIF($5, ''), "fullName"), "email"=COALESCE(NULLIF($6, ''), "email"), "phoneNumber"=COALESCE(NULLIF($7, ''), "phoneNumber"), "statusId"=COALESCE(NULLIF($8, 0), "statusId") WHERE "id"=$9 RETURNING*`;
-  const value = [data.bookingDate, Number(data.movieId), Number(data.cinemaId), Number(data.movieScheduleId), data.fullName, data.email, data.phoneNumber, Number(data.statusId), id];
+  const sql = `UPDATE "transactions" SET "bookingDate"=COALESCE(NULLIF($1, '')::DATE, "bookingDate"), "movieId"=COALESCE(NULLIF($2, '')::INT, "movieId"), "cinemaId"=COALESCE(NULLIF($3, '')::INT, "cinemaId"), "movieScheduleId"=COALESCE(NULLIF($4, '')::INT, "movieScheduleId"), "fullName"=COALESCE(NULLIF($5, ''), "fullName"), "email"=COALESCE(NULLIF($6, ''), "email"), "phoneNumber"=COALESCE(NULLIF($7, ''), "phoneNumber"), "statusId"=COALESCE(NULLIF($8, '')::INT, "statusId") WHERE "id"=$9 RETURNING*`;
+  const value = [data.bookingDate, data.movieId, data.cinemaId, data.movieScheduleId, data.fullName, data.email, data.phoneNumber, data.statusId, id];
   db.query(sql, value, cb);
 }
 

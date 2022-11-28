@@ -21,8 +21,8 @@ exports.readResetPasswordModel = (id, cb) => {
 
 // Mengupdate data resetPassword (Update)
 exports.updateResetPasswordModel = (id, data, cb) => {
-  const sql = `UPDATE "resetPassword" SET "email"=COALESCE(NULLIF($1, ''), "email"), "userId"=COALESCE(NULLIF($2, 0), "userId"), "code"=COALESCE(NULLIF($3, ''), "code") WHERE "id"=$4 RETURNING *`;
-  const value = [data.email, Number(data.userId), data.code, id];
+  const sql = `UPDATE "resetPassword" SET "email"=COALESCE(NULLIF($1, ''), "email"), "userId"=COALESCE(NULLIF($2, '')::INT, "userId"), "code"=COALESCE(NULLIF($3, ''), "code") WHERE "id"=$4 RETURNING *`;
+  const value = [data.email, data.userId, data.code, id];
   db.query(sql, value, cb);
 }
 

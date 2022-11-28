@@ -22,8 +22,8 @@ exports.readMovieScheduleModel = (id, cb) => {
 
 // Mengupdate data movieSchedule (Update)
 exports.updateMovieScheduleModel = (id, data, cb) => {
-  const sql = `UPDATE "movieSchedule" SET "movieId"=COALESCE(NULLIF($1, 0), "movieId"), "cinemaId"=COALESCE(NULLIF($2, 0), "cinemaId"), "price"=COALESCE(NULLIF($3, 0), "price"), "startDate"=$4, "endDate"=$5 WHERE "id"=$6 RETURNING *`;
-  const value = [Number(data.movieId), Number(data.cinemaId), Number(data.price), data.startDate, data.endDate, id];
+  const sql = `UPDATE "movieSchedule" SET "movieId"=COALESCE(NULLIF($1, '')::INT, "movieId"), "cinemaId"=COALESCE(NULLIF($2, '')::INT, "cinemaId"), "price"=COALESCE(NULLIF($3, '')::BIGINT, "price"), "startDate"=COALESCE(NULLIF($4, '')::DATE, "startDate"), "endDate"=COALESCE(NULLIF($5, '')::DATE, "endDate") WHERE "id"=$6 RETURNING *`;
+  const value = [data.movieId, data.cinemaId, data.price, data.startDate, data.endDate, id];
   db.query(sql, value, cb);
 }
 

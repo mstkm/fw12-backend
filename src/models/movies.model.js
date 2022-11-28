@@ -34,9 +34,9 @@ exports.updateMovieModel = (id, data, cb) => {
   const sql = `UPDATE "movies" SET
   "title"=COALESCE(NULLIF($1, ''), "title"),
   "picture"=COALESCE(NULLIF($2, ''), "picture"),
-  "releaseDate"=$3,
+  "releaseDate"=COALESCE(NULLIF($3, '')::DATE, "releaseDate"),
   "director"=COALESCE(NULLIF($4, ''), "director"),
-  "duration"=$5,
+  "duration"=COALESCE(NULLIF($5, '')::TIME, "duration"),
   "synopsis"=COALESCE(NULLIF($6, ''), "synopsis")
   WHERE "id"=$7 RETURNING *`;
   const value = [data.title, data.picture, data.releaseDate, data.director, data.duration, data.synopsis, id];
