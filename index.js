@@ -1,11 +1,14 @@
 // Import modules
 const express = require('express')
+const cors = require('cors')
 
 const app = express()
 
 // untuk membaca body dari request method
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+// memperbolehkan untuk diakses pad frontend
+app.use(cors())
 
 // terhubung ke index routes
 app.use('/', require('./src/routes'))
