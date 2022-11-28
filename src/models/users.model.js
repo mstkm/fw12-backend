@@ -29,6 +29,13 @@ exports.readUserModel = (id, cb) => {
   db.query(sql, value, cb);
 }
 
+// Auth login dengan email
+exports.readUserByEmail = (email, cb) => {
+  const sql = 'SELECT * FROM users WHERE email=$1';
+  const value = [email];
+  db.query(sql, value, cb);
+}
+
 // Mengupdate data user (Update)
 exports.updateUserModel = (id, data, cb) => {
   const sql = `UPDATE users SET "picture"=COALESCE(NULLIF($1, ''), "picture"), "firstName"=COALESCE(NULLIF($2, ''), "firstName"), "lastName"=COALESCE(NULLIF($3, ''), "lastName"), "phoneNumber"=COALESCE(NULLIF($4, ''), "phoneNumber"), "email"=COALESCE(NULLIF($5, ''), "email"), "password"=COALESCE(NULLIF($6, ''), "password") WHERE id=$7 RETURNING *`
