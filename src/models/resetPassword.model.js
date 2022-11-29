@@ -12,10 +12,18 @@ exports.readAllResetPasswordModel = (cb) => {
   const sql = 'SELECT * FROM "resetPassword"';
   db.query(sql, cb);
 }
+
 // Membaca data resetPassword berdasarkan id (Read)
 exports.readResetPasswordModel = (id, cb) => {
   const sql = 'SELECT * FROM "resetPassword" WHERE "id"=$1';
   const value = [id];
+  db.query(sql, value, cb);
+}
+
+// Membaca data resetPassword berdasarkan email dan code
+exports.readResetPasswordByEmailAndCodeModel = (data, cb) => {
+  const sql = 'SELECT * FROM "resetPassword" WHERE "email"=$1 AND "code"=$2';
+  const value = [data.email, data.code];
   db.query(sql, value, cb);
 }
 
