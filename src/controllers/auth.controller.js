@@ -29,10 +29,17 @@ exports.register = (req, res) => {
     if (err) {
       return errorHandler(err, res);
     }
+    console.log(data);
+    const {rows: users} = data;
+    const [user] = users;
+    const token = jwt.sign({id: user.id}, 'backend-secret')
+
     return res.status(200).json({
       success: true,
       message: 'Register success',
-      results: data.rows[0]
+      results: {
+        token
+      }
     })
   })
 }
