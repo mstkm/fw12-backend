@@ -10,6 +10,9 @@ app.use(express.urlencoded({extended: false}))
 // memperbolehkan untuk diakses pad frontend
 app.use(cors())
 
+// static route
+app.use('/assets/uploads', express.static('uploads/'))
+
 // terhubung ke index routes
 app.use('/', require('./src/routes'))
 
