@@ -49,3 +49,15 @@ exports.deleteMovieModel = (id, cb) => {
   const value = [id];
   db.query(sql, value, cb);
 }
+
+
+exports.upcomingModel = (data, cb) => {
+  const sql = `SELECT m.picture, m.title, string_agg(g.name, ', ') AS genre, m."releaseDate"::DATE FROM "movies" m
+  JOIN "movieGenre" mg ON mg."movieId" = m.id
+  JOIN "genre" g ON g.id = mg."genreId"
+  WHERE "releaseDate"::DATE::VARCHAR LIKE $1
+  GROUP BY m.id`;
+  // const value = [`%-10-%`];
+  const value = [`%${data.month}%`];
+  db.query(sql, value, cb)
+}

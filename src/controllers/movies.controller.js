@@ -1,4 +1,4 @@
-const {createMovieModel, readAllMoviesModel, countMoviesModel, readMovieModel, updateMovieModel, deleteMovieModel} = require('../models/movies.model')
+const {createMovieModel, readAllMoviesModel, countMoviesModel, readMovieModel, updateMovieModel, deleteMovieModel, upcomingModel} = require('../models/movies.model')
 const errorHandler = require('../helpers/errorHandler.helper')
 const filter = require('../helpers/filter.helper')
 
@@ -72,6 +72,20 @@ exports.deleteMovie = (req, res) => {
     return res.status(200).json({
       success: true,
       message: 'Delete movie successfully',
+      results: data.rows
+    })
+  })
+}
+
+exports.upcoming = (req, res) => {
+  upcomingModel(req.params, (err, data) => {
+    if (err) {
+      console.log(err)
+      return errorHandler(err, res);
+    }
+    return res.status(200).json({
+      success: true,
+      message: 'List of upcoming movies',
       results: data.rows
     })
   })
