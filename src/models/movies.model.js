@@ -50,6 +50,16 @@ exports.deleteMovieModel = (id, cb) => {
   db.query(sql, value, cb);
 }
 
+exports.nowShowingModel = (data, cb) => {
+  const sql = `SELECT ms."startDate", ms."endDate", m.picture, m.title, string_agg(g.name, ', ') AS genre FROM "movies" m
+  JOIN "movieGenre" mg ON mg."movieId" = m.id
+  JOIN "genre" g ON g.id = mg."genreId"
+  JOIN "movieSchedule" ms ON ms."movieId" = m.id
+  WHERE $1::DATE BETWEEN ms."startDate" AND ms."endDate"
+  GROUP BY m.id, ms."startDate", ms."endDate";`
+  const value = [data.date];
+  db.query(sql, value, cb);
+}
 
 exports.upcomingModel = (data, cb) => {
   const sql = `SELECT m.picture, m.title, string_agg(g.name, ', ') AS genre, m."releaseDate"::DATE FROM "movies" m
