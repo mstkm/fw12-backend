@@ -50,14 +50,35 @@ exports.deleteMovieModel = (id, cb) => {
   db.query(sql, value, cb);
 }
 
-exports.nowShowingModel = (cb) => {
+// Menghitung total data movies untuk nowShowing
+exports.countNowShowingModel = (data, cb) => {
+  const sql = `SELECT COUNT("title") AS "totalData" FROM "movies" m
+  JOIN "movieSchedule" ms ON ms."movieId" = m.id
+  WHERE current_date BETWEEN ms."startDate" AND ms."endDate" AND title LIKE $1`;
+  const value = [`%${data.search}%`]
+  db.query(sql, value, cb)
+}
+
+exports.nowShowingModel = (data, cb) => {
   const sql = `SELECT m.picture, m.title, string_agg(g.name, ', ') AS genre, ms."startDate", ms."endDate" FROM "movies" m
   JOIN "movieGenre" mg ON mg."movieId" = m.id
   JOIN "genre" g ON g.id = mg."genreId"
   JOIN "movieSchedule" ms ON ms."movieId" = m.id
-  WHERE current_date BETWEEN ms."startDate" AND ms."endDate"
-  GROUP BY m.id, ms.id;`
-  db.query(sql, cb);
+  WHERE current_date BETWEEN ms."startDate" AND ms."endDate" AND title LIKE $3
+  GROUP BY m.id, ms.id
+  ORDER BY "${data.sortBy}" ${data.sort} LIMIT $1 OFFSET $2;`
+  const value = [data.limit, data.offset, `%${data.search}%`]
+  db.query(sql, value, cb);
+}
+
+// Menghitung total data movies untuk upcoming
+exports.countNowShowingModel = (data, cb) => {
+  const sql = `SELECT COUNT("title") AS "totalData" FROM "movies" m
+  JOIN "movieSchedule" ms ON ms."movieId" = m.id
+  WHERE date_part('month', "releaseDate")::TEXT = COALESCE(NULLIF($1, ''), date_part('month', current_date)::TEXT)
+  AND date_part('year', "releaseDate")::TEXT = COALESCE(NULLIF($2, ''), date_part('year', current_date)::TEXT) AND title LIKE $3`;
+  const value = [data.month, data.year, `%${data.search}%`]
+  db.query(sql, value, cb)
 }
 
 exports.upcomingModel = (data, cb) => {
@@ -65,8 +86,9 @@ exports.upcomingModel = (data, cb) => {
   JOIN "movieGenre" mg ON mg."movieId" = m.id
   JOIN "genre" g ON g.id = mg."genreId"
   WHERE date_part('month', "releaseDate")::TEXT = COALESCE(NULLIF($1, ''), date_part('month', current_date)::TEXT)
-  AND date_part('year', "releaseDate")::TEXT = COALESCE(NULLIF($2, ''), date_part('year', current_date)::TEXT)
-  GROUP BY m.id`;
-  const value = [data.month, data.year];
+  AND date_part('year', "releaseDate")::TEXT = COALESCE(NULLIF($2, ''), date_part('year', current_date)::TEXT) AND title LIKE $3
+  GROUP BY m.id
+  ORDER BY "${data.sortBy}" ${data.sort} LIMIT $4 OFFSET $5`;
+  const value = [data.month, data.year, `%${data.search}%`, data.limit, data.offset];
   db.query(sql, value, cb)
 }

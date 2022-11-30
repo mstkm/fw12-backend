@@ -1,4 +1,4 @@
-const {createMovieModel, readAllMoviesModel, countMoviesModel, readMovieModel, updateMovieModel, deleteMovieModel, upcomingModel, nowShowingModel} = require('../models/movies.model')
+const {createMovieModel, readAllMoviesModel, countMoviesModel, readMovieModel, updateMovieModel, deleteMovieModel, upcomingModel, nowShowingModel, countNowShowingModel} = require('../models/movies.model')
 const errorHandler = require('../helpers/errorHandler.helper')
 const filter = require('../helpers/filter.helper')
 
@@ -77,29 +77,90 @@ exports.deleteMovie = (req, res) => {
   })
 }
 
+// Now Showing
 exports.nowShowing = (req, res) => {
-  nowShowingModel((err, data) => {
+  const sortable = ['title', 'createdAt', 'updatedAt']
+
+  req.query.limit = parseInt(req.query.limit) || 5;
+  req.query.page = parseInt(req.query.page) || 1;
+  req.query.search = req.query.search || '';
+  req.query.sort = req.query.sort || 'ASC';
+  req.query.sortBy = (sortable.includes(req.query.sortBy) && req.query.sortBy) || 'createdAt';
+
+  const params = {
+    limit: req.query.limit,
+    offset: (parseInt(req.query.page) - 1) * req.query.limit,
+    search: req.query.search,
+    sort: req.query.sort,
+    sortBy: req.query.sortBy
+  }
+
+  countNowShowingModel(req.query, (err, data) => {
     if (err) {
-      console.log(err);
       return errorHandler(err, res);
     }
-    return res.status(200).json({
-      success: true,
-      message: 'List of now showing movies',
-      results: data.rows
+    const {totalData} = data.rows[0];
+    const pageInfo = {
+      totalData: parseInt(totalData),
+      totalPage: Math.ceil(totalData/req.query.limit),
+      page: req.query.page,
+      nextPage: req.query.page < Math.ceil(totalData/req.query.limit) ? req.query.page + 1 : null,
+      prevPage: req.query.page > 1 ? req.query.page - 1 : null
+    }
+    nowShowingModel(params, (err, data) => {
+      if (err) {
+        return errorHandler(err, res);
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'List of now showing movies',
+        pageInfo,
+        results: data.rows
+      })
     })
   })
 }
 
+// Upcoming
 exports.upcoming = (req, res) => {
-  upcomingModel(req.query, (err, data) => {
+  const sortable = ['title']
+
+  req.query.limit = parseInt(req.query.limit) || 5;
+  req.query.page = parseInt(req.query.page) || 1;
+  req.query.search = req.query.search || '';
+  req.query.sort = req.query.sort || 'ASC';
+  req.query.sortBy = (sortable.includes(req.query.sortBy) && req.query.sortBy) || 'title';
+
+  const params = {
+    limit: req.query.limit,
+    offset: (parseInt(req.query.page) - 1) * req.query.limit,
+    search: req.query.search,
+    sort: req.query.sort,
+    sortBy: req.query.sortBy
+  }
+
+  countNowShowingModel(req.query, (err, data) => {
     if (err) {
       return errorHandler(err, res);
     }
-    return res.status(200).json({
-      success: true,
-      message: 'List of upcoming movies',
-      results: data.rows
+    const {totalData} = data.rows[0];
+    const pageInfo = {
+      totalData: parseInt(totalData),
+      totalPage: Math.ceil(totalData/req.query.limit),
+      page: req.query.page,
+      nextPage: req.query.page < Math.ceil(totalData/req.query.limit) ? req.query.page + 1 : null,
+      prevPage: req.query.page > 1 ? req.query.page - 1 : null
+    }
+    upcomingModel(req.query, (err, data) => {
+      if (err) {
+        return errorHandler(err, res);
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'List of upcoming movies',
+        pageInfo,
+        results: data.rows
+      })
     })
   })
 }
