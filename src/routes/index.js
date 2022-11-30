@@ -64,7 +64,7 @@ routes.use('/transactions/:id', require('./transactions.router'))
 // Route auth
 routes.use('/auth', require('./auth.router'))
 
-routes.use('/movies/nowShowing/:date', require('./movies.router'))
-routes.use('/movies/upcoming/:month', require('./movies.router'))
+routes.use('/movies/nowShowing', require('./movies.router'))
+routes.use('/movies/upcoming', require('./movies.router'))
 
 module.exports = routes

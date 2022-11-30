@@ -78,7 +78,7 @@ exports.deleteMovie = (req, res) => {
 }
 
 exports.nowShowing = (req, res) => {
-  nowShowingModel(req.params, (err, data) => {
+  nowShowingModel((err, data) => {
     if (err) {
       console.log(err);
       return errorHandler(err, res);
@@ -92,7 +92,7 @@ exports.nowShowing = (req, res) => {
 }
 
 exports.upcoming = (req, res) => {
-  upcomingModel(req.params, (err, data) => {
+  upcomingModel(req.query, (err, data) => {
     if (err) {
       return errorHandler(err, res);
     }

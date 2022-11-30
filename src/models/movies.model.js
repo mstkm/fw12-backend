@@ -50,23 +50,23 @@ exports.deleteMovieModel = (id, cb) => {
   db.query(sql, value, cb);
 }
 
-exports.nowShowingModel = (data, cb) => {
-  const sql = `SELECT ms."startDate", ms."endDate", m.picture, m.title, string_agg(g.name, ', ') AS genre FROM "movies" m
+exports.nowShowingModel = (cb) => {
+  const sql = `SELECT m.picture, m.title, string_agg(g.name, ', ') AS genre, ms."startDate", ms."endDate" FROM "movies" m
   JOIN "movieGenre" mg ON mg."movieId" = m.id
   JOIN "genre" g ON g.id = mg."genreId"
   JOIN "movieSchedule" ms ON ms."movieId" = m.id
-  WHERE $1 BETWEEN ms."startDate" AND ms."endDate"
-  GROUP BY m.id, ms."startDate", ms."endDate";`
-  const value = [data.date];
-  db.query(sql, value, cb);
+  WHERE current_date BETWEEN ms."startDate" AND ms."endDate"
+  GROUP BY m.id, ms.id;`
+  db.query(sql, cb);
 }
 
 exports.upcomingModel = (data, cb) => {
   const sql = `SELECT m.picture, m.title, string_agg(g.name, ', ') AS genre, m."releaseDate"::DATE FROM "movies" m
   JOIN "movieGenre" mg ON mg."movieId" = m.id
   JOIN "genre" g ON g.id = mg."genreId"
-  WHERE "releaseDate"::DATE::VARCHAR LIKE $1
+  WHERE date_part('month', "releaseDate")::TEXT = COALESCE(NULLIF($1, ''), date_part('month', current_date)::TEXT)
+  AND date_part('year', "releaseDate")::TEXT = COALESCE(NULLIF($2, ''), date_part('year', current_date)::TEXT)
   GROUP BY m.id`;
-  const value = [`%2022-${data.month}%`];
+  const value = [data.month, data.year];
   db.query(sql, value, cb)
 }

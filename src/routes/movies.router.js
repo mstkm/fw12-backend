@@ -4,6 +4,9 @@ const {createMovie, readAllMovies, readMovie, updateMovie, deleteMovie, upcoming
 // Membuat data movie (Create)
 moviesRouter.post('/', createMovie)
 
+moviesRouter.get('/nowShowing', nowShowing)
+moviesRouter.get('/upcoming', upcoming)
+
 // Membaca data movies (Read)
 moviesRouter.get('/', readAllMovies)
 // Membaca data movie berdasarakan id (Read)
@@ -15,7 +18,6 @@ moviesRouter.patch('/:id', updateMovie)
 // Menghapus data movie (Delete)
 moviesRouter.delete('/:id', deleteMovie)
 
-moviesRouter.get('/nowShowing/:date', nowShowing)
-moviesRouter.get('/upcoming/:month', upcoming)
+
 
 module.exports = moviesRouter
