@@ -1,6 +1,7 @@
 const {createUserModel, readAllUserModel, countUsersModel, readUserModel, updateUserModel, deleteUserModel} = require('../models/users.model')
 const errorHandler = require('../helpers/errorHandler.helper')
 const filter = require('../helpers/filter.helper')
+const fs = require('fs')
 
 // Controller kirim ke route
 // Membuat data user (Create)
@@ -50,6 +51,21 @@ exports.readUser = (req, res) => {
 
 // Mengupdate data user (Update)
 exports.updateUser = (req, res) => {
+  if (req.file) {
+    req.body.picture = req.file.filename;
+    readUserModel(req.params.id, (err, data) => {
+      if (data.rows.length) {
+        const [user] = data.rows;
+        if (user.picture) {
+          fs.rm('uploads/'+user.picture, {force: true}, (err) => {
+            if (err) {
+              return errorHandler(err, res);
+            }
+          })
+        }
+      }
+    })
+  }
   updateUserModel(req.params.id, req.body, (err, data) => {
     if (err) {
       return errorHandler(err, res);

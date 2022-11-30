@@ -2,8 +2,8 @@ const routes = require('express').Router()
 const {authMiddleware} = require('../middleware/auth.middleware')
 
 // Route user
-routes.use('/users', require('./users.router'))
-routes.use('/users/:id', require('./users.router'))
+routes.use('/users', authMiddleware, require('./users.router'))
+routes.use('/users/:id', authMiddleware, require('./users.router'))
 
 // Route casts
 routes.use('/casts', require('./casts.router'))

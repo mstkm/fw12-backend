@@ -1,5 +1,6 @@
 const usersRouter = require('express').Router()
 const { readAllUsers, readUser, createUser, updateUser, deleteUser } = require('../controllers/users.controller')
+const uploadMiddleware = require('../middleware/upload.middleware')
 
 // Membuat data user (Create)
 usersRouter.post('/', createUser) // menerima query string dan body
@@ -10,7 +11,7 @@ usersRouter.get('/', readAllUsers) // menerima query string
 usersRouter.get('/:id', readUser) // menerima query string
 
 // Mengudate data user (Update)
-usersRouter.patch('/:id', updateUser) // menerima query string dan body
+usersRouter.patch('/:id', uploadMiddleware, updateUser) // menerima query string dan body
 
 // Menghapus data user (Delete)
 usersRouter.delete('/:id', deleteUser) // menerima query string
