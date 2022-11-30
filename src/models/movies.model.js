@@ -55,7 +55,7 @@ exports.nowShowingModel = (data, cb) => {
   JOIN "movieGenre" mg ON mg."movieId" = m.id
   JOIN "genre" g ON g.id = mg."genreId"
   JOIN "movieSchedule" ms ON ms."movieId" = m.id
-  WHERE $1::DATE BETWEEN ms."startDate" AND ms."endDate"
+  WHERE $1 BETWEEN ms."startDate" AND ms."endDate"
   GROUP BY m.id, ms."startDate", ms."endDate";`
   const value = [data.date];
   db.query(sql, value, cb);
