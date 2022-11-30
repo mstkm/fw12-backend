@@ -1,4 +1,5 @@
 const {createTransactionModel, readAllTransactionModel, countTransactionsModel, readTransactionModel, updateTransactionModel, deleteTransactionModel} = require('../models/transactions.model')
+const {createReservedSeatModel} = require('../models/reservedSeat.model')
 const errorHandler = require('../helpers/errorHandler.helper')
 const filter = require('../helpers/filter.helper')
 
@@ -73,4 +74,28 @@ exports.deleteTransaction = (req, res) => {
       results: data.rows
     })
   })
+}
+
+exports.newCreateTransaction = (req, res) => {
+  const userId = req.userData.id;
+  if (userId) {
+    createTransactionModel(req.body, (err, dataTransaction) => {
+      if (err) {
+        return errorHandler(err, res);
+      }
+      const seatNum = req.body.seatNum;
+      const transactionId = dataTransaction.rows[0].id;
+      console.log(transactionId)
+      createReservedSeatModel({seatNum, transactionId}, (err, dataReservedSeat) => {
+        if (err) {
+          return errorHandler(err, res);
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Create transaction successfully',
+          results: {transaction: dataTransaction.rows, reservedSeat: dataReservedSeat.rows}
+        })
+      })
+    })
+  }
 }

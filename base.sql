@@ -245,6 +245,9 @@ ALTER TABLE "users" ADD CONSTRAINT "email" UNIQUE ("email");
 
 ALTER TABLE "genre" ADD CONSTRAINT "name" UNIQUE ("name");
 
+ALTER TABLE "transactions" ADD COLUMN IF NOT EXISTS "userId" INT;
+ALTER TABLE "transactions" ADD COLUMN IF NOT EXISTS "paymentMethodId" INT;
+
 
 -- Relasi secara simbolik (FOREIGN KEY)
 

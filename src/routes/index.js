@@ -1,5 +1,6 @@
 const routes = require('express').Router()
 const {authMiddleware} = require('../middleware/auth.middleware')
+const {newCreateTransaction} = require('../controllers/transactions.controller')
 
 // Route user
 routes.use('/users', authMiddleware, require('./users.router'))
@@ -58,13 +59,17 @@ routes.use('/subscribers', require('./subscribers.router'))
 routes.use('/subscribers/:id', require('./subscribers.router'))
 
 // Route transactions
-routes.use('/transactions', require('./transactions.router'))
-routes.use('/transactions/:id', require('./transactions.router'))
+routes.use('/transactions', authMiddleware, require('./transactions.router'))
+routes.use('/transactions/:id', authMiddleware, require('./transactions.router'))
 
 // Route auth
 routes.use('/auth', require('./auth.router'))
 
+// route now dan upcoming movie
 routes.use('/movies/nowShowing', require('./movies.router'))
 routes.use('/movies/upcoming', require('./movies.router'))
+
+// route create transaction
+routes.use('/createTransaction', authMiddleware, newCreateTransaction)
 
 module.exports = routes
