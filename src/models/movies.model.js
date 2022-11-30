@@ -67,7 +67,6 @@ exports.upcomingModel = (data, cb) => {
   JOIN "genre" g ON g.id = mg."genreId"
   WHERE "releaseDate"::DATE::VARCHAR LIKE $1
   GROUP BY m.id`;
-  // const value = [`%-10-%`];
-  const value = [`%${data.month}%`];
+  const value = [`%2022-${data.month}%`];
   db.query(sql, value, cb)
 }
