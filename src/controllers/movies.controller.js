@@ -1,4 +1,4 @@
-const {createMovieModel, readAllMoviesModel, countMoviesModel, readMovieModel, updateMovieModel, deleteMovieModel, upcomingModel, nowShowingModel, countNowShowingModel} = require('../models/movies.model')
+const {createMovieModel, readAllMoviesModel, countMoviesModel, readMovieModel, updateMovieModel, deleteMovieModel, upcomingModel, nowShowingModel, countNowShowingModel, countUpcomingModel} = require('../models/movies.model')
 const errorHandler = require('../helpers/errorHandler.helper')
 const filter = require('../helpers/filter.helper')
 
@@ -125,6 +125,8 @@ exports.nowShowing = (req, res) => {
 exports.upcoming = (req, res) => {
   const sortable = ['title']
 
+  req.query.month = req.query.month || new Date().getMonth()
+  req.query.year = req.query.year || new Date().getFullYear()
   req.query.limit = parseInt(req.query.limit) || 5;
   req.query.page = parseInt(req.query.page) || 1;
   req.query.search = req.query.search || '';
@@ -132,6 +134,8 @@ exports.upcoming = (req, res) => {
   req.query.sortBy = (sortable.includes(req.query.sortBy) && req.query.sortBy) || 'title';
 
   const params = {
+    month: req.query.month,
+    year: req.query.year,
     limit: req.query.limit,
     offset: (parseInt(req.query.page) - 1) * req.query.limit,
     search: req.query.search,
@@ -139,7 +143,7 @@ exports.upcoming = (req, res) => {
     sortBy: req.query.sortBy
   }
 
-  countNowShowingModel(req.query, (err, data) => {
+  countUpcomingModel(req.query, (err, data) => {
     if (err) {
       return errorHandler(err, res);
     }
@@ -151,7 +155,7 @@ exports.upcoming = (req, res) => {
       nextPage: req.query.page < Math.ceil(totalData/req.query.limit) ? req.query.page + 1 : null,
       prevPage: req.query.page > 1 ? req.query.page - 1 : null
     }
-    upcomingModel(req.query, (err, data) => {
+    upcomingModel(params, (err, data) => {
       if (err) {
         return errorHandler(err, res);
       }

@@ -72,7 +72,7 @@ exports.nowShowingModel = (data, cb) => {
 }
 
 // Menghitung total data movies untuk upcoming
-exports.countNowShowingModel = (data, cb) => {
+exports.countUpcomingModel = (data, cb) => {
   const sql = `SELECT COUNT("title") AS "totalData" FROM "movies" m
   JOIN "movieSchedule" ms ON ms."movieId" = m.id
   WHERE date_part('month', "releaseDate")::TEXT = COALESCE(NULLIF($1, ''), date_part('month', current_date)::TEXT)
