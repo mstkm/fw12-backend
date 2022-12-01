@@ -79,13 +79,13 @@ exports.deleteMovie = (req, res) => {
 
 // Now Showing
 exports.nowShowing = (req, res) => {
-  const sortable = ['title', 'createdAt', 'updatedAt']
+  const sortable = ['title', 'startDate', 'endDate']
 
   req.query.limit = parseInt(req.query.limit) || 5;
   req.query.page = parseInt(req.query.page) || 1;
   req.query.search = req.query.search || '';
   req.query.sort = req.query.sort || 'ASC';
-  req.query.sortBy = (sortable.includes(req.query.sortBy) && req.query.sortBy) || 'createdAt';
+  req.query.sortBy = (sortable.includes(req.query.sortBy) && req.query.sortBy) || 'startDate';
 
   const params = {
     limit: req.query.limit,
@@ -123,7 +123,7 @@ exports.nowShowing = (req, res) => {
 
 // Upcoming
 exports.upcoming = (req, res) => {
-  const sortable = ['title']
+  const sortable = ['title', 'releaseDate']
 
   req.query.month = req.query.month || new Date().getMonth()
   req.query.year = req.query.year || new Date().getFullYear()
@@ -131,7 +131,7 @@ exports.upcoming = (req, res) => {
   req.query.page = parseInt(req.query.page) || 1;
   req.query.search = req.query.search || '';
   req.query.sort = req.query.sort || 'ASC';
-  req.query.sortBy = (sortable.includes(req.query.sortBy) && req.query.sortBy) || 'title';
+  req.query.sortBy = (sortable.includes(req.query.sortBy) && req.query.sortBy) || 'releaseDate';
 
   const params = {
     month: req.query.month,
