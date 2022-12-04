@@ -1,10 +1,10 @@
 const errorHandler = require('./errorHandler.helper')
 
-const filter = (data, sortable, countModel, res, cb) => {
+const filter = (data, sortable, sortableBy, countModel, res, cb) => {
   data.page = parseInt(data.page) || 1;
   data.limit = parseInt(data.limit) || 5;
   data.search = data.search || '';
-  data.sort = data.sort || 'ASC';
+  data.sort = (sortableBy.includes(data.sort) && data.sort) || 'ASC';
   data.sortBy = (sortable.includes(data.sortBy) && data.sortBy) || 'createdAt';
 
   const params = {

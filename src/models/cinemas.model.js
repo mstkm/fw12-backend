@@ -3,7 +3,7 @@ const db = require('../helpers/db.helper')
 // Model yang bisa digunakan di controller
 // Membuat data cinema (Create)
 exports.createCinemaModel = (data, cb) => {
-  const sql = 'INSERT INTO cinemas ("picture", "name", "address", "city") VALUES ($1, $2, $3, $4)';
+  const sql = 'INSERT INTO cinemas ("picture", "name", "address", "city") VALUES ($1, $2, $3, $4) RETURNING *';
   const value = [data.picture, data.name, data.address, data.city];
   db.query(sql, value, cb);
 }

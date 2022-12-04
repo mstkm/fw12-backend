@@ -276,3 +276,5 @@ ALTER TABLE "transactions" ADD CONSTRAINT "fk_cinemaId" FOREIGN KEY ("cinemaId")
 ALTER TABLE "transactions" ADD CONSTRAINT "fk_movieScheduleId" FOREIGN KEY ("movieScheduleId") REFERENCES "movieSchedule" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE "transactions" ADD CONSTRAINT "fk_statusId" FOREIGN KEY ("statusId") REFERENCES "status" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "transactions" ADD CONSTRAINT "fk_paymentMethodId" FOREIGN KEY ("paymentMethodId") REFERENCES "paymentMethod" ("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -2,8 +2,21 @@ const {readUserByEmail, createUserModel, updateUserModel} = require('../models/u
 const { createResetPasswordModel, readResetPasswordByEmailAndCodeModel, deleteResetPasswordModel } = require('../models/resetPassword.model')
 const jwt = require('jsonwebtoken')
 const errorHandler = require('../helpers/errorHandler.helper')
+const { reset } = require('nodemon')
 
 exports.login = (req, res) => {
+  if (req.body.email === '') {
+    return res.status(400).json({
+      success: false,
+      message: 'Email cannot be empty'
+    })
+  }
+  if (req.body.password === '') {
+    return res.status(400).json({
+      success: false,
+      message: 'Password cannot be empty'
+    })
+  }
   readUserByEmail(req.body.email, (err, {rows}) => {
     if(rows.length) {
       const [user] = rows;
@@ -26,20 +39,37 @@ exports.login = (req, res) => {
 }
 
 exports.register = (req, res) => {
+  if (req.body.firstName === '') {
+    return res.status(400).json({
+      success: false,
+      message: 'First name cannot be empty'
+    })
+  }
+  if (req.body.phoneNumber === '') {
+    return res.status(400).json({
+      success: false,
+      message: 'Phone number cannot be empty'
+    })
+  }
+  if (req.body.email === '') {
+    return res.status(400).json({
+      success: false,
+      message: 'Email cannot be empty'
+    })
+  }
+  if (req.body.password === '') {
+    return res.status(400).json({
+      success: false,
+      message: 'Password cannot be empty'
+    })
+  }
   createUserModel(req.body, (err, data) => {
     if (err) {
       return errorHandler(err, res);
     }
-    const {rows: users} = data;
-    const [user] = users;
-    const token = jwt.sign({id: user.id}, 'backend-secret')
-
     return res.status(200).json({
       success: true,
-      message: 'Register success',
-      results: {
-        token
-      }
+      message: 'Register success'
     })
   })
 }
@@ -68,7 +98,7 @@ exports.forgotPassword = (req, res) => {
     } else {
       return res.status(400).json({
         success: false,
-        message: 'User not found'
+        message: 'User not found. Check your email.'
       })
     }
   })
@@ -88,7 +118,7 @@ exports.resetPassword = (req, res) => {
         deleteResetPasswordModel(resetRequest.id, (err, data) => {
           return res.status(400).json({
             success: false,
-            message: 'Code is expired',
+            message: 'Code is expired'
           })
         })
       } else {
@@ -96,17 +126,18 @@ exports.resetPassword = (req, res) => {
           if (err) {
             errorHandler(err, res);
           }
-          return res.status(200).json({
-            success: true,
-            message: 'Password has been updated, please relogin',
-            results: data.rows
+          deleteResetPasswordModel(resetRequest.id, (err, data) => {
+            return res.status(200).json({
+              success: true,
+              message: 'Password has been updated, please relogin'
+            })
           })
         })
       }
     } else {
       return res.status(400).json({
         success: false,
-        message: 'Reset Request not found'
+        message: 'Reset request not found. Please check your code or email.'
       })
     }
   })
@@ -117,3 +148,4 @@ exports.resetPassword = (req, res) => {
   })
  }
 }
+

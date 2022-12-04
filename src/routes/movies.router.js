@@ -1,8 +1,9 @@
 const moviesRouter = require('express').Router()
 const {createMovie, readAllMovies, readMovie, updateMovie, deleteMovie, upcoming, nowShowing} = require('../controllers/movies.controller')
+const {authMiddleware} = require('../middleware/auth.middleware')
 
 // Membuat data movie (Create)
-moviesRouter.post('/', createMovie)
+moviesRouter.post('/', authMiddleware, createMovie)
 
 moviesRouter.get('/nowShowing', nowShowing)
 moviesRouter.get('/upcoming', upcoming)
@@ -13,10 +14,10 @@ moviesRouter.get('/', readAllMovies)
 moviesRouter.get('/:id', readMovie)
 
 // Mengupdate data movie (Update)
-moviesRouter.patch('/:id', updateMovie)
+moviesRouter.patch('/:id', authMiddleware, updateMovie)
 
 // Menghapus data movie (Delete)
-moviesRouter.delete('/:id', deleteMovie)
+moviesRouter.delete('/:id', authMiddleware, deleteMovie)
 
 
 

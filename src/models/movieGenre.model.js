@@ -29,7 +29,7 @@ exports.updateMovieGenreModel = (id, data, cb) => {
 
 // Mneghapus data movieGenre (Delete)
 exports.deleteMovieGenreModel = (id, cb) => {
-  const sql = 'DELETE FROM "movieGenre" WHERE "id"=$1';
+  const sql = 'DELETE FROM "movieGenre" WHERE "id"=$1 RETURNING *';
   const value = [id];
   db.query(sql, value, cb);
 }

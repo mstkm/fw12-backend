@@ -45,7 +45,7 @@ exports.updateMovieModel = (id, data, cb) => {
 
 // Menghapus data movie (Delete)
 exports.deleteMovieModel = (id, cb) => {
-  const sql = 'DELETE FROM "movies" WHERE "id"=$1';
+  const sql = 'DELETE FROM "movies" WHERE "id"=$1 RETURNING *';
   const value = [id];
   db.query(sql, value, cb);
 }

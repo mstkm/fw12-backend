@@ -1,10 +1,14 @@
 const routes = require('express').Router()
 const {authMiddleware} = require('../middleware/auth.middleware')
-const {newCreateTransaction} = require('../controllers/transactions.controller')
+
+// Route profile
+routes.use('/profile', authMiddleware, require('./profile.router'))
+routes.use('/profile/update', authMiddleware, require('./profile.router'))
+routes.use('/profile/transaction', authMiddleware, require('./profile.router'))
 
 // Route user
-routes.use('/users', authMiddleware, require('./users.router'))
-routes.use('/users/:id', authMiddleware, require('./users.router'))
+routes.use('/users', require('./users.router'))
+routes.use('/users/:id', require('./users.router'))
 
 // Route casts
 routes.use('/casts', require('./casts.router'))
@@ -35,8 +39,8 @@ routes.use('/movieScheduleTimes', require('./movieScheduleTimes.router'))
 routes.use('/movieScheduleTimes/:id', require('./movieScheduleTimes.router'))
 
 // Route movies
-routes.use('/movies', authMiddleware, require('./movies.router'))
-routes.use('/movies/:id', authMiddleware, require('./movies.router'))
+routes.use('/movies', require('./movies.router'))
+routes.use('/movies/:id', require('./movies.router'))
 
 // Route paymentMethod
 routes.use('/paymentMethod', require('./paymentMethod.router'))
@@ -59,8 +63,8 @@ routes.use('/subscribers', require('./subscribers.router'))
 routes.use('/subscribers/:id', require('./subscribers.router'))
 
 // Route transactions
-routes.use('/transactions', authMiddleware, require('./transactions.router'))
-routes.use('/transactions/:id', authMiddleware, require('./transactions.router'))
+routes.use('/transactions', require('./transactions.router'))
+routes.use('/transactions/:id', require('./transactions.router'))
 
 // Route auth
 routes.use('/auth', require('./auth.router'))
@@ -69,7 +73,5 @@ routes.use('/auth', require('./auth.router'))
 routes.use('/movies/nowShowing', require('./movies.router'))
 routes.use('/movies/upcoming', require('./movies.router'))
 
-// route create transaction
-routes.use('/createTransaction', authMiddleware, newCreateTransaction)
 
 module.exports = routes

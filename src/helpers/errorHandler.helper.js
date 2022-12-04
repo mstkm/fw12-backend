@@ -1,5 +1,29 @@
 const errorHandler = (err, res) => {
-  if(err.message.includes('unique constraint "email"')) {
+  if (err.message.includes('too large')) {
+    return res.status(400).json({
+      success: false,
+      message: 'File too large. File size max 1MB'
+    })
+  }
+  if (err.message.includes('.png, .jpg and .jpeg')) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid input for picture. Only .png, .jpg and .jpeg format allowed!'
+    })
+  }
+  if (err.message.includes('invalid input syntax for type timestamp with time zone')) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid input for date. Formats date (YYYY-MM-DD)'
+    })
+  }
+  if (err.message.includes('invalid input syntax for type time')) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid input for time. Format time (HH:MM:SS)'
+    })
+  }
+  if (err.message.includes('unique constraint "email"')) {
     return res.status(400).json({
       success: false,
       message: 'Email already exists!'
@@ -14,7 +38,7 @@ const errorHandler = (err, res) => {
   if (err.message.includes('syntax for type date')) {
     return res.status(400).json({
       success: false,
-      message: 'Invalid input for date'
+      message: 'Invalid input for date. Format date (YYYY-MM-DD)'
     })
   }
   if (err.message.includes('violates foreign key')) {

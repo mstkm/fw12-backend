@@ -36,7 +36,7 @@ exports.updateResetPasswordModel = (id, data, cb) => {
 
 // Menghapus data resetPasword (delete)
 exports.deleteResetPasswordModel = (id, cb) => {
-  const sql = 'DELETE FROM "resetPassword" WHERE "id"=$1';
+  const sql = 'DELETE FROM "resetPassword" WHERE "id"=$1 RETURNING *';
   const value = [id];
   db.query(sql, value, cb);
 }

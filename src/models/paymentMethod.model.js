@@ -38,7 +38,7 @@ exports.updatePaymentMethodModel = (id, data, cb) => {
 
 // Menghapus data paymentMethod (Delete)
 exports.deletePaymentMethodModel = (id, cb) => {
-  const sql = 'DELETE FROM "paymentMethod" WHERE "id"=$1';
+  const sql = 'DELETE FROM "paymentMethod" WHERE "id"=$1 RETURNING *';
   const value = [id];
   db.query(sql, value, cb);
 }

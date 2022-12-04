@@ -7,7 +7,7 @@ const app = express()
 // untuk membaca body dari request method
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
-// memperbolehkan untuk diakses pad frontend
+// memperbolehkan untuk diakses pada frontend
 app.use(cors())
 
 // static route

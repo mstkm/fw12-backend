@@ -3,7 +3,7 @@ const db = require('../helpers/db.helper')
 // Model yang bisa digunakan di controller
 // Membuat data casts (Create)
 exports.createCastModel = (data, cb) => {
-  const sql = 'INSERT INTO casts ("name") VALUES ($1)';
+  const sql = 'INSERT INTO casts ("name") VALUES ($1) RETURNING *';
   const value = [data.name];
   db.query(sql, value, cb)
 }

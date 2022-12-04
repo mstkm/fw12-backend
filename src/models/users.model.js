@@ -45,7 +45,7 @@ exports.updateUserModel = (id, data, cb) => {
 
 // Menghapus data user (Update)
 exports.deleteUserModel = (id, cb) => {
-  const sql = 'DELETE FROM users WHERE id=$1';
+  const sql = 'DELETE FROM users WHERE id=$1 RETURNING *';
   const value = [id];
   db.query(sql, value, cb)
 }

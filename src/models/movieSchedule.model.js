@@ -29,7 +29,7 @@ exports.updateMovieScheduleModel = (id, data, cb) => {
 
 // Menghapus data movieSchedule (Delete)
 exports.deleteMovieScheduleModel = (id, cb) => {
-  const sql = 'DELETE FROM "movieSchedule" WHERE "id"=$1';
+  const sql = 'DELETE FROM "movieSchedule" WHERE "id"=$1 RETURNING *';
   const value = [id];
   db.query(sql, value, cb);
 }

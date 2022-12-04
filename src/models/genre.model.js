@@ -38,7 +38,7 @@ exports.updateGenreModel = (id, data, cb) => {
 
 // Menghapus data genre (DELETE)
 exports.deleteGenreModel = (id, cb) => {
-  const sql = 'DELETE FROM genre WHERE "id"=$1';
+  const sql = 'DELETE FROM genre WHERE "id"=$1 RETURNING *';
   const value = [id];
   db.query(sql, value, cb);
 }

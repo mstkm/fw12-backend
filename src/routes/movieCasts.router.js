@@ -1,8 +1,9 @@
 const movieCastsRouter = require('express').Router()
 const {createMovieCast, readAllMovieCasts, readMovieCast, updateMovieCast, deleteMovieCast} = require('../controllers/movieCasts.controller')
+const {authMiddleware} = require('../middleware/auth.middleware')
 
 // Membuat data movieCast (Create)
-movieCastsRouter.post('/', createMovieCast)
+movieCastsRouter.post('/', authMiddleware, createMovieCast)
 
 // Membaca data semua movieCasts (Read)
 movieCastsRouter.get('/', readAllMovieCasts)
@@ -10,10 +11,10 @@ movieCastsRouter.get('/', readAllMovieCasts)
 movieCastsRouter.get('/:id', readMovieCast)
 
 // Mengupdate data movieCast (Update)
-movieCastsRouter.patch('/:id', updateMovieCast)
+movieCastsRouter.patch('/:id', authMiddleware, updateMovieCast)
 
 // Menghapus data movieCast (Delete)
-movieCastsRouter.delete('/:id', deleteMovieCast)
+movieCastsRouter.delete('/:id', authMiddleware, deleteMovieCast)
 
 
 module.exports = movieCastsRouter

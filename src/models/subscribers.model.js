@@ -37,7 +37,7 @@ exports.updateSubscriberModel = (id, data, cb) => {
 
 // Menghapus data subscriber (Delete)
 exports.deleteSubscriberModel = (id, cb) => {
-  const sql = 'DELETE FROM "subscribers"WHERE "id"=$1';
+  const sql = 'DELETE FROM "subscribers"WHERE "id"=$1 RETURNING *';
   const value = [id];
   db.query(sql, value, cb);
 }

@@ -13,8 +13,24 @@ const storage = multer.diskStorage({
   }
 })
 
+const fileFilter = (req, file, cb) => {
+  console.log(file)
+  if (file.mimetype == 'image/png' || file.mimetype == 'image/jpg' || file.mimetype == 'image/jpeg') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+    return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+  }
+}
+
+const limits = {
+  fileSize: 1024 * 1024
+}
+
 const upload =  multer({
-  storage
+  storage,
+  fileFilter,
+  limits
 })
 
 const uploadMiddleware = upload.single('picture')
@@ -22,7 +38,8 @@ const uploadMiddleware = upload.single('picture')
 module.exports = (req, res, next) => {
   uploadMiddleware(req, res, (err) => {
     if (err) {
-      return errorHandler(err, res)
+      console.log(err)
+      return errorHandler(err, res);
     }
     next()
   })

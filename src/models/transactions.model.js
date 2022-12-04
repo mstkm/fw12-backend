@@ -30,14 +30,14 @@ exports.readTransactionModel = (id, cb) => {
 
 // Mengupdate data transaction (Update)
 exports.updateTransactionModel = (id, data, cb) => {
-  const sql = `UPDATE "transactions" SET "bookingDate"=COALESCE(NULLIF($1, '')::DATE, "bookingDate"), "movieId"=COALESCE(NULLIF($2, '')::INT, "movieId"), "cinemaId"=COALESCE(NULLIF($3, '')::INT, "cinemaId"), "movieScheduleId"=COALESCE(NULLIF($4, '')::INT, "movieScheduleId"), "fullName"=COALESCE(NULLIF($5, ''), "fullName"), "email"=COALESCE(NULLIF($6, ''), "email"), "phoneNumber"=COALESCE(NULLIF($7, ''), "phoneNumber"), "statusId"=COALESCE(NULLIF($8, '')::INT, "statusId"), "userId"=COALESCE(NULLIF($9, '')::INT, "userId"), "paymentMethodId"=COALESCE(NULLIF($10, '')::INT, "paymentMethodId") WHERE "id"=$11 RETURNING*`;
-  const value = [data.bookingDate, data.movieId, data.cinemaId, data.movieScheduleId, data.fullName, data.email, data.phoneNumber, data.statusId, id];
+  const sql = `UPDATE "transactions" SET "bookingDate"=COALESCE(NULLIF($1, '')::DATE, "bookingDate"), "movieId"=COALESCE(NULLIF($2, '')::INT, "movieId"), "cinemaId"=COALESCE(NULLIF($3, '')::INT, "cinemaId"), "movieScheduleId"=COALESCE(NULLIF($4, '')::INT, "movieScheduleId"), "fullName"=COALESCE(NULLIF($5, ''), "fullName"), "email"=COALESCE(NULLIF($6, ''), "email"), "phoneNumber"=COALESCE(NULLIF($7, ''), "phoneNumber"), "statusId"=COALESCE(NULLIF($8, '')::INT, "statusId"), "userId"=COALESCE(NULLIF($9, '')::INT, "userId"), "paymentMethodId"=COALESCE(NULLIF($10, '')::INT, "paymentMethodId") WHERE "id"=$11 RETURNING *`;
+  const value = [data.bookingDate, data.movieId, data.cinemaId, data.movieScheduleId, data.fullName, data.email, data.phoneNumber, data.statusId, data.userId, data.paymentMethodId, id];
   db.query(sql, value, cb);
 }
 
 // Menghapus data transaction (Delete)
 exports.deleteTransactionModel = (id, cb) => {
-  const sql = 'DELETE FROM "transactions" WHERE "id"=$1';
+  const sql = 'DELETE FROM "transactions" WHERE "id"=$1 RETURNING *';
   const value = [id];
   db.query(sql, value, cb);
 }

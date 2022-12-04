@@ -28,7 +28,7 @@ exports.updateStatusModel = (id, data, cb) => {
 
 // Menghapus data status (Delete)
 exports.deleteStatusModel = (id, cb) => {
-  const sql = 'DELETE FROM "status" WHERE "id"=$1';
+  const sql = 'DELETE FROM "status" WHERE "id"=$1 RETURNING *';
   const value = [id];
   db.query(sql, value, cb);
 }
