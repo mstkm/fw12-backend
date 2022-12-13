@@ -3,7 +3,7 @@ const {Pool} = require('pg')
 // Mengkoneksikan database
 const db = new Pool({
   // connectionString: "postgressql://postgres:1@localhost:5432/karcis?schema=public"
-  connectionString: "postgresql://postgres:Jf34HF9GeWllYd8j@db.hsrutyxbyqdxverovejj.supabase.co:5432/postgres"
+  connectionString: "postgresql://postgres:UUkQQSsPWdvUdsn2@db.mvgxuhfntvnuheajycms.supabase.co:5432/postgres"
 })
 
 db.connect((err) => {
