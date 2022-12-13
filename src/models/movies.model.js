@@ -24,7 +24,13 @@ exports.countMoviesModel = (filter, cb) => {
 
 // Membaca data movie berdasarakan id (Read)
 exports.readMovieModel = (id, cb) => {
-  const sql = 'SELECT * FROM movies WHERE "id"=$1';
+  const sql = `SELECT m.id, m.picture, m.title, string_agg(DISTINCT g.name, ', ') AS genre, string_agg(DISTINCT c.name, ', ') AS casts, m."releaseDate", m.director, m.duration, m.synopsis FROM movies m
+  JOIN "movieGenre" mg ON mg."movieId" = m.id
+  JOIN genre g ON mg."genreId" = g.id
+  JOIN "movieCasts" mc ON mc."movieId" = m.id
+  JOIN casts c ON mc."castsId" = c.id
+  WHERE m.id = $1
+  GROUP BY m.id`;
   const value = [id];
   db.query(sql, value, cb);
 }
@@ -60,7 +66,7 @@ exports.countNowShowingModel = (data, cb) => {
 }
 
 exports.nowShowingModel = (data, cb) => {
-  const sql = `SELECT m.picture, m.title, string_agg(g.name, ', ') AS genre, ms."startDate", ms."endDate" FROM "movies" m
+  const sql = `SELECT m.id, m.picture, m.title, string_agg(g.name, ', ') AS genre, ms."startDate", ms."endDate" FROM "movies" m
   JOIN "movieGenre" mg ON mg."movieId" = m.id
   JOIN "genre" g ON g.id = mg."genreId"
   JOIN "movieSchedule" ms ON ms."movieId" = m.id
@@ -82,7 +88,7 @@ exports.countUpcomingModel = (data, cb) => {
 }
 
 exports.upcomingModel = (data, cb) => {
-  const sql = `SELECT m.picture, m.title, string_agg(g.name, ', ') AS genre, m."releaseDate"::DATE FROM "movies" m
+  const sql = `SELECT m.id, m.picture, m.title, string_agg(g.name, ', ') AS genre, m."releaseDate"::DATE FROM "movies" m
   JOIN "movieGenre" mg ON mg."movieId" = m.id
   JOIN "genre" g ON g.id = mg."genreId"
   WHERE date_part('month', "releaseDate")::TEXT = COALESCE(NULLIF($1, ''), date_part('month', current_date)::TEXT)
