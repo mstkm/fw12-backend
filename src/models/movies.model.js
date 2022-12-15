@@ -10,7 +10,20 @@ exports.createMovieModel = (data, cb) => {
 
 // Membaca data movies (Read)
 exports.readAllMoviesModel = (filter, cb) => {
-  const sql = `SELECT * FROM movies WHERE title LIKE $3 ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`;
+  // const sql = `SELECT m.id, m.picture, m.title, string_agg(DISTINCT g.name, ', ') AS genre, string_agg(DISTINCT c.name, ', ') AS casts, m."releaseDate", m.director, m.duration, m.synopsis FROM movies m
+  // JOIN "movieGenre" mg ON mg."movieId" = m.id
+  // JOIN genre g ON mg."genreId" = g.id
+  // JOIN "movieCasts" mc ON mc."movieId" = m.id
+  // JOIN casts c ON mc."castsId" = c.id
+  // WHERE title LIKE $3 ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`;
+  const sql = `SELECT m.id, m.picture, m.title, string_agg(DISTINCT g.name, ', ') AS genre, string_agg(DISTINCT c.name, ', ') AS casts, m."releaseDate", m.director, m.duration, m.synopsis, m."createdAt", m."updatedAt" FROM movies m
+  JOIN "movieGenre" mg ON mg."movieId" = m.id
+  JOIN genre g ON mg."genreId" = g.id
+  JOIN "movieCasts" mc ON mc."movieId" = m.id
+  JOIN casts c ON mc."castsId" = c.id
+WHERE title LIKE $3
+GROUP BY m.id
+ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`
   const value = [filter.limit, filter.offset, `%${filter.search}%`]
   db.query(sql, value, cb);
 }
