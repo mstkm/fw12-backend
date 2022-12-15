@@ -1,4 +1,4 @@
-const {createMovieScheduleModel, readAllMovieScheduleModel, readMovieScheduleModel, updateMovieScheduleModel, deleteMovieScheduleModel} = require('../models/movieSchedule.model')
+const {createMovieScheduleModel, readAllMovieScheduleModel, readMovieScheduleModel, updateMovieScheduleModel, deleteMovieScheduleModel, readListMovieScheduleModel} = require('../models/movieSchedule.model')
 const errorHandler = require('../helpers/errorHandler.helper')
 
 // Controller kirim ke route
@@ -125,5 +125,23 @@ exports.deleteMovieSchedule = (req, res) => {
         message: `Movie genre id ${req.params.id} doesn't exist`
       })
     }
+  })
+}
+
+
+exports.readListMovieSchedule = (req, res) => {
+  console.log(req.params.id)
+  console.log(req.params.city)
+  console.log(req.params.date)
+  readListMovieScheduleModel(req.params.id, req.params.city, req.params.date, (err, data) => {
+    if (err) {
+      console.log(err)
+      return errorHandler(err, res);
+    }
+    return res.status(200).json({
+      success: true,
+      message: 'List movie schedule',
+      results: data.rows
+    })
   })
 }

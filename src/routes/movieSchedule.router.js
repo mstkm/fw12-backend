@@ -1,5 +1,5 @@
 const movieScheduleRouter = require('express').Router()
-const {createMovieSchedule, readAllMovieSchedule, readMovieSchedule, updateMovieSchedule, deleteMovieSchedule} = require('../controllers/movieSchedule.controller')
+const {createMovieSchedule, readAllMovieSchedule, readMovieSchedule, updateMovieSchedule, deleteMovieSchedule, readListMovieSchedule} = require('../controllers/movieSchedule.controller')
 const {authMiddleware} = require('../middleware/auth.middleware')
 
 // Membuat data movieSchedule (Create)
@@ -9,6 +9,8 @@ movieScheduleRouter.post('/', authMiddleware, createMovieSchedule)
 movieScheduleRouter.get('/', readAllMovieSchedule)
 // Membaca data movieSchedule berdasarkan id (Read)
 movieScheduleRouter.get('/:id', readMovieSchedule)
+
+movieScheduleRouter.get('/listMovieSChedule/:id/:city/:date', readListMovieSchedule)
 
 // Mengupdate data movieSchedule (Update)
 movieScheduleRouter.patch('/:id', authMiddleware, updateMovieSchedule)
