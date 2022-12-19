@@ -22,12 +22,12 @@ exports.readMovieScheduleModel = (id, cb) => {
 
 // List movie schedule by movie id
 exports.readListMovieScheduleModel = (id, city, date, cb) => {
-  const sql = `SELECT ms."movieId", ms."cinemaId", price, "startDate", "endDate", c.picture AS "cinemaPicture", c.name AS "cinemaName", c.address, c.city, array_agg(mst.time) AS time FROM "movieSchedule" ms
+  const sql = `SELECT ms.id, ms."movieId", ms."cinemaId", price, "startDate", "endDate", c.picture AS "cinemaPicture", c.name AS "cinemaName", c.address, c.city, array_agg(mst.time) AS time FROM "movieSchedule" ms
   JOIN cinemas c ON c.id = ms."cinemaId"
   JOIN "movieScheduleTimes" mst ON mst."movieScheduleId" = ms.id
   WHERE ms."movieId" = $1 AND c.city = $2 AND $3 BETWEEN ms."startDate" AND ms."endDate"
   GROUP BY ms.id, c.picture, c.name, c.address, c.city;`
-  const value = [id, city, date,]
+  const value = [id, city, date]
   db.query(sql, value, cb)
 }
 
