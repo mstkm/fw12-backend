@@ -130,9 +130,6 @@ exports.deleteMovieSchedule = (req, res) => {
 
 
 exports.readListMovieSchedule = (req, res) => {
-  console.log(req.params.id)
-  console.log(req.params.city)
-  console.log(req.params.date)
   readListMovieScheduleModel(req.params.id, req.params.city, req.params.date, (err, data) => {
     if (err) {
       console.log(err)

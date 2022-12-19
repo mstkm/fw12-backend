@@ -2,8 +2,8 @@ const db = require('../helpers/db.helper')
 
 // Membuat data transaction (Create)
 exports.createTransactionModel = (data, cb) => {
-  const sql = 'INSERT INTO "transactions" ("bookingDate", "movieId", "cinemaId", "movieScheduleId", "fullName", "email", "phoneNumber", "statusId", "userId", "paymentMethodId") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 ,$11) RETURNING *';
-  const value = [data.bookingDate, data.movieId, data.cinemaId, data.movieScheduleId, data.fullName, data.email, data.phoneNumber, data.statusId, data.userId, data.paymentMethodId, data.bookingTime];
+  const sql = 'INSERT INTO "transactions" ("bookingDate", "movieId", "cinemaId", "movieScheduleId", "fullName", "email", "phoneNumber", "statusId", "userId", "paymentMethodId", "bookingTime", "seatNum") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 , $11, $12) RETURNING *';
+  const value = [data.bookingDate, data.movieId, data.cinemaId, data.movieScheduleId, data.fullName, data.email, data.phoneNumber, data.statusId, data.userId, data.paymentMethodId, data.bookingTime, data.seatNum];
   db.query(sql, value, cb);
 }
 

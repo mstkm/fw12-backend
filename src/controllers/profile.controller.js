@@ -62,11 +62,13 @@ exports.createTransaction = (req, res) => {
     phoneNumber: req.body.phoneNumber,
     paymentMethodId: req.body.paymentMethodId,
     statusId: req.body.statusId,
-    seatNum: req.body.seatNum
+    seatNum: req.body.seatNum,
+    bookingTime: req.body.bookingTime
   }
   if (new Date(req.body.bookingDate) > new Date()) {
     createTransactionModel(params, (err, dataTransaction) => {
       if (err) {
+        console.log(err)
         return errorHandler(err, res);
       }
       const seatNum = req.body.seatNum;
