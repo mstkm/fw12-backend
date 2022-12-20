@@ -1,4 +1,8 @@
 // Import modules
+require("dotenv").config({
+  path: ".env",
+})
+
 const express = require('express')
 const cors = require('cors')
 
@@ -24,6 +28,7 @@ app.get ('/', (req, res) => {
 })
 
 // menjalankan aplikasi
-app.listen(8888, () => {
-  console.log('App listening on port 8888')
+const PORT = process.env.PORT || 8888
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`)
 })
