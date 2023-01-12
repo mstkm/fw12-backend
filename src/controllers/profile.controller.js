@@ -1,5 +1,5 @@
 const {readUserModel, updateUserModel} = require('../models/users.model')
-const {createTransactionModel} = require('../models/transactions.model')
+const {createTransactionModel, readTransactionByIdModel} = require('../models/transactions.model')
 const {createReservedSeatModel} = require('../models/reservedSeat.model')
 const errorHandler = require("../helpers/errorHandler.helper")
 const fs = require('fs')
@@ -63,7 +63,11 @@ exports.createTransaction = (req, res) => {
     paymentMethodId: req.body.paymentMethodId,
     statusId: req.body.statusId,
     seatNum: req.body.seatNum,
-    bookingTime: req.body.bookingTime
+    cinemaPicture: req.body.cinemaPicture,
+    movieTitle: req.body.movieTitle,
+    cinemaName: req.body.cinemaName,
+    bookingTime: req.body.bookingTime,
+    totalPrice: req.body.totalPrice
   }
   if (new Date(req.body.bookingDate) > new Date()) {
     createTransactionModel(params, (err, dataTransaction) => {
@@ -73,7 +77,6 @@ exports.createTransaction = (req, res) => {
       }
       const seatNum = req.body.seatNum;
       const transactionId = dataTransaction.rows[0].id;
-      console.log(transactionId)
       createReservedSeatModel({seatNum, transactionId}, (err, dataReservedSeat) => {
         if (err) {
           return errorHandler(err, res);
@@ -91,4 +94,31 @@ exports.createTransaction = (req, res) => {
       message: 'Create transaction failed. Booking date not valid'
     })
   }
+}
+
+// Membaca data transactions berdsarakan id (Read)
+exports.readTransactionById = (req, res) => {
+  if (req.params.id === ':id') {
+    return res.status(400).json({
+      success: false,
+      message: 'Transaction id is not filled yet'
+    })
+  }
+  readTransactionByIdModel(req.params.id, (err, data) => {
+    if (err) {
+      return errorHandler(err, res);
+    }
+    if (data.rows.length) {
+      return res.status(200).json({
+        success: true,
+        message: 'Detail transaction',
+        results: data.rows[0]
+      })
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: `Transaction id ${req.params.id} doesn't exist`
+      })
+    }
+  })
 }
