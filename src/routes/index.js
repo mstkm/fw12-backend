@@ -5,6 +5,7 @@ const {authMiddleware} = require('../middleware/auth.middleware')
 routes.use('/profile', authMiddleware, require('./profile.router'))
 routes.use('/profile/update', authMiddleware, require('./profile.router'))
 routes.use('/profile/transaction', authMiddleware, require('./profile.router'))
+routes.use('/profile/transaction/details/:id', authMiddleware, require('./profile.router'))
 
 // Route user
 routes.use('/users', require('./users.router'))
