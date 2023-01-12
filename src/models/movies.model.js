@@ -71,7 +71,7 @@ exports.deleteMovieModel = (id, cb) => {
 
 // Menghitung total data movies untuk nowShowing
 exports.countNowShowingModel = (data, cb) => {
-  const sql = `SELECT COUNT("title") AS "totalData" FROM "movies" m
+  const sql = `SELECT COUNT(DISTINCT title) AS "totalData" FROM "movies" m
   JOIN "movieSchedule" ms ON ms."movieId" = m.id
   WHERE current_date BETWEEN ms."startDate" AND ms."endDate" AND title LIKE $1`;
   const value = [`%${data.search}%`]
@@ -79,12 +79,12 @@ exports.countNowShowingModel = (data, cb) => {
 }
 
 exports.nowShowingModel = (data, cb) => {
-  const sql = `SELECT m.id, m.picture, m.title, string_agg(g.name, ', ') AS genre, ms."startDate", ms."endDate" FROM "movies" m
+  const sql = `SELECT m.id, m.picture, m.title, string_agg(DISTINCT g.name, ', ') AS genre, ms."startDate", ms."endDate" FROM "movies" m
   JOIN "movieGenre" mg ON mg."movieId" = m.id
   JOIN "genre" g ON g.id = mg."genreId"
   JOIN "movieSchedule" ms ON ms."movieId" = m.id
   WHERE current_date BETWEEN ms."startDate" AND ms."endDate" AND title LIKE $3
-  GROUP BY m.id, ms.id
+  GROUP BY m.id, ms."startDate", ms."endDate"
   ORDER BY "${data.sortBy}" ${data.sort} LIMIT $1 OFFSET $2;`
   const value = [data.limit, data.offset, `%${data.search}%`]
   db.query(sql, value, cb);
