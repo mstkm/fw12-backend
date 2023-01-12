@@ -51,7 +51,7 @@ exports.readTransaction = (req, res) => {
       return res.status(200).json({
         success: true,
         message: 'Detail transaction',
-        results: data.rows[0]
+        results: data.rows
       })
     } else {
       return res.status(400).json({
