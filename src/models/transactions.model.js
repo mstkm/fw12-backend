@@ -2,8 +2,8 @@ const db = require('../helpers/db.helper')
 
 // Membuat data transaction (Create)
 exports.createTransactionModel = (data, cb) => {
-  const sql = 'INSERT INTO "transactions" ("bookingDate", "movieId", "cinemaId", "movieScheduleId", "fullName", "email", "phoneNumber", "statusId", "userId", "paymentMethodId", "bookingTime", "seatNum") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 , $11, $12) RETURNING *';
-  const value = [data.bookingDate, data.movieId, data.cinemaId, data.movieScheduleId, data.fullName, data.email, data.phoneNumber, data.statusId, data.userId, data.paymentMethodId, data.bookingTime, data.seatNum];
+  const sql = 'INSERT INTO "transactions" ("bookingDate", "movieId", "cinemaId", "movieScheduleId", "fullName", "email", "phoneNumber", "statusId", "userId", "paymentMethodId", "bookingTime", "seatNum", "cinemaPicture", "movieTitle", "cinemaName", "totalPrice") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 , $11, $12, $13, $14, $15, $16) RETURNING *';
+  const value = [data.bookingDate, data.movieId, data.cinemaId, data.movieScheduleId, data.fullName, data.email, data.phoneNumber, data.statusId, data.userId, data.paymentMethodId, data.bookingTime, data.seatNum, data.cinemaPicture, data.movieTitle, data.cinemaName, data.totalPrice];
   db.query(sql, value, cb);
 }
 
@@ -21,8 +21,15 @@ exports.countTransactionsModel = (filter, cb) => {
   db.query(sql, value, cb)
 }
 
-// Membaca data transactions berdsarakan id (Read)
+// Membaca data transactions berdsarakan id user (Read)
 exports.readTransactionModel = (id, cb) => {
+  const sql = 'SELECT * FROM "transactions" WHERE "userId"=$1 ORDER BY id DESC';
+  const value = [id];
+  db.query(sql, value, cb);
+}
+
+// Membaca data transactions berdsarakan id (Read)
+exports.readTransactionByIdModel = (id, cb) => {
   const sql = 'SELECT * FROM "transactions" WHERE "id"=$1';
   const value = [id];
   db.query(sql, value, cb);
