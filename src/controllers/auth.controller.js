@@ -2,7 +2,6 @@ const {readUserByEmail, createUserModel, updateUserModel} = require('../models/u
 const { createResetPasswordModel, readResetPasswordByEmailAndCodeModel, deleteResetPasswordModel } = require('../models/resetPassword.model')
 const jwt = require('jsonwebtoken')
 const errorHandler = require('../helpers/errorHandler.helper')
-const { reset } = require('nodemon')
 
 exports.login = (req, res) => {
   if (req.body.email === '') {
@@ -21,7 +20,7 @@ exports.login = (req, res) => {
     if(rows.length) {
       const [user] = rows;
       if (req.body.password === user.password) {
-        const token = jwt.sign({id: user.id}, 'backend-secret')
+        const token = jwt.sign({id: user.id, role: user.role}, 'backend-secret')
         return res.status(200).json({
           success: true,
           message: 'Login success',
@@ -71,7 +70,7 @@ exports.register = (req, res) => {
       if(rows.length) {
         const [user] = rows;
         if (req.body.password === user.password) {
-          const token = jwt.sign({id: user.id}, 'backend-secret')
+          const token = jwt.sign({id: user.id, role: user.role}, 'backend-secret')
           return res.status(200).json({
             success: true,
             message: 'Register success',
