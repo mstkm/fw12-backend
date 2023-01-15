@@ -1,5 +1,5 @@
 const routes = require('express').Router()
-const {authMiddleware} = require('../middleware/auth.middleware')
+const { authMiddleware } = require('../middleware/auth.middleware')
 
 // Route profile
 routes.use('/profile', authMiddleware, require('./profile.router'))
@@ -73,6 +73,5 @@ routes.use('/auth', require('./auth.router'))
 // route now dan upcoming movie
 routes.use('/movies/nowShowing', require('./movies.router'))
 routes.use('/movies/upcoming', require('./movies.router'))
-
 
 module.exports = routes
