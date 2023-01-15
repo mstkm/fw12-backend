@@ -28,9 +28,7 @@ const storage = new CloudinaryStorage({
     folder: 'karcis',
     format: async (req, file) => file.originalname.split('.')[file.originalname.split('.').length - 1], // supports promises as well
     public_id: (req, file) => {
-      const extension = file.originalname.split('.')
-      const ext = extension[extension.length - 1]
-      const name = `${new Date().getDate()}_${new Date().getTime()}.${ext}`
+      const name = `${new Date().getDate()}_${new Date().getTime()}`
       return name
     }
   }
