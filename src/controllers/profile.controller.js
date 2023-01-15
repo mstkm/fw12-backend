@@ -2,7 +2,15 @@ const { readUserModel, updateUserModel } = require('../models/users.model')
 const { createTransactionModel, readTransactionByIdModel } = require('../models/transactions.model')
 const { createReservedSeatModel } = require('../models/reservedSeat.model')
 const errorHandler = require('../helpers/errorHandler.helper')
-const fs = require('fs')
+// const fs = require('fs')
+const cloudinary = require('cloudinary').v2
+
+// Configuration
+cloudinary.config({
+  cloud_name: 'dvzrmzldr',
+  api_key: '482277453968621',
+  api_secret: 'lGk-vJmdwpUfXjNPs0BByUfNuRc'
+})
 
 // Read
 exports.readProfile = (req, res) => {
@@ -22,21 +30,27 @@ exports.readProfile = (req, res) => {
 // Update
 exports.updateProfile = (req, res) => {
   req.params.id = req.userData.id
-  if (req.file) {
-    req.body.picture = req.file.path
-    readUserModel(req.params.id, (_err, data) => {
-      if (data.rows.length) {
-        const [user] = data.rows
-        if (user.picture) {
-          fs.rm('uploads/' + user.picture, { force: true }, (err) => {
-            if (err) {
-              return errorHandler(err, res)
-            }
-          })
-        }
+  readUserModel(req.params.id, (_err, data) => {
+    if (data.rows.length) {
+      const [user] = data.rows
+      if (user.picture) {
+        // fs.rm('uploads/' + user.picture, { force: true }, (err) => {
+        //   if (err) {
+        //     return errorHandler(err, res)
+        //   }
+        // })
+        const arrPath = user.picture.split('/')
+        const folder = arrPath[arrPath.length - 2]
+        const name = arrPath[arrPath.length - 1]
+        const filename = folder + '/' + name
+        const toDestroy = filename.split('.')[filename.split('.').length - 2]
+        cloudinary.uploader.destroy(toDestroy).then(result => console.log(result))
+        console.log('user picture: ' + user.picture)
+        console.log(toDestroy)
       }
-    })
-  }
+    }
+  })
+  req.body.picture = req.file.path
   updateUserModel(req.params.id, req.body, (err, data) => {
     if (err) {
       return errorHandler(err, res)
