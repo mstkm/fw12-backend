@@ -1,4 +1,4 @@
-const {createResetPasswordModel, readAllResetPasswordModel, readResetPasswordModel, updateResetPasswordModel, deleteResetPasswordModel} = require('../models/resetPassword.model')
+const { createResetPasswordModel, readAllResetPasswordModel, readResetPasswordModel, updateResetPasswordModel, deleteResetPasswordModel } = require('../models/resetPassword.model')
 const errorHandler = require('../helpers/errorHandler.helper')
 
 // Membuat data resetPassword (Create)
@@ -23,7 +23,7 @@ exports.createResetPassword = (req, res) => {
   }
   createResetPasswordModel(req.body, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     return res.status(200).json({
       success: true,
@@ -37,7 +37,7 @@ exports.createResetPassword = (req, res) => {
 exports.readAllResetPassword = (req, res) => {
   readAllResetPasswordModel((err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     return res.status(200).json({
       success: true,
@@ -57,7 +57,7 @@ exports.readResetPassword = (req, res) => {
   }
   readResetPasswordModel(req.params.id, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     if (data.rows.length) {
       return res.status(200).json({
@@ -84,7 +84,7 @@ exports.updateResetPassword = (req, res) => {
   }
   updateResetPasswordModel(req.params.id, req.body, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     if (data.rows.length) {
       return res.status(200).json({
@@ -111,7 +111,7 @@ exports.deleteResetPassword = (req, res) => {
   }
   deleteResetPasswordModel(req.params.id, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     if (data.rows.length) {
       return res.status(200).json({
