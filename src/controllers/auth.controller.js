@@ -2,6 +2,7 @@ const { readUserByEmail, createUserModel, updateUserModel } = require('../models
 const { createResetPasswordModel, readResetPasswordByEmailAndCodeModel, deleteResetPasswordModel } = require('../models/resetPassword.model')
 const jwt = require('jsonwebtoken')
 const errorHandler = require('../helpers/errorHandler.helper')
+const { transport, mailOptions } = require('../helpers/mail.helper')
 
 exports.login = (req, res) => {
   if (req.body.email === '') {
@@ -86,29 +87,39 @@ exports.register = (req, res) => {
 
 exports.forgotPassword = (req, res) => {
   const { email } = req.body
-  readUserByEmail(email, (err, { rows: users }) => {
+  readUserByEmail(email, async (err, { rows: users }) => {
     if (err) {
       return errorHandler(err, res)
     }
-    if (users.length) {
-      const [user] = users
-      const data = {
-        email,
-        userId: user.id,
-        code: String(Math.round(Math.random() * 90000)).padEnd(6, '0')
-      }
-      createResetPasswordModel(data, (_err, { rows: results }) => {
-        if (results.length) {
-          return res.status(200).json({
-            success: true,
-            message: 'Reset password has been requested'
-          })
+    try {
+      if (users.length) {
+        const [user] = users
+        const code = String(Math.round(Math.random() * 90000)).padEnd(6, '0')
+        await transport.sendMail(mailOptions(email, code))
+        const data = {
+          email,
+          userId: user.id,
+          code
         }
-      })
-    } else {
-      return res.status(400).json({
+        createResetPasswordModel(data, (_err, { rows: results }) => {
+          if (results.length) {
+            return res.status(200).json({
+              success: true,
+              message: 'Reset password has been requested'
+            })
+          }
+        })
+      } else {
+        return res.status(400).json({
+          success: false,
+          message: 'User not found. Check your email.'
+        })
+      }
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json({
         success: false,
-        message: 'User not found. Check your email.'
+        message: 'Failed to request.'
       })
     }
   })
@@ -124,7 +135,7 @@ exports.resetPassword = (req, res) => {
         errorHandler(err, res)
       }
       if (rows.length) {
-        if (new Date(resetRequest.createdAt).getTime() + 60 * 1000 < new Date().getTime()) {
+        if (new Date(resetRequest.createdAt).getTime() + 60 * 10000 < new Date().getTime()) {
           deleteResetPasswordModel(resetRequest.id, (_err, data) => {
             return res.status(400).json({
               success: false,
@@ -147,7 +158,7 @@ exports.resetPassword = (req, res) => {
       } else {
         return res.status(400).json({
           success: false,
-          message: 'Reset request not found. Please check your code or email.'
+          message: 'Reset request not found. Try send request again.'
         })
       }
     })
