@@ -1,12 +1,12 @@
-const {readUserModel, updateUserModel} = require('../models/users.model')
-const {createTransactionModel, readTransactionByIdModel} = require('../models/transactions.model')
-const {createReservedSeatModel} = require('../models/reservedSeat.model')
-const errorHandler = require("../helpers/errorHandler.helper")
+const { readUserModel, updateUserModel } = require('../models/users.model')
+const { createTransactionModel, readTransactionByIdModel } = require('../models/transactions.model')
+const { createReservedSeatModel } = require('../models/reservedSeat.model')
+const errorHandler = require('../helpers/errorHandler.helper')
 const fs = require('fs')
 
 // Read
 exports.readProfile = (req, res) => {
-  req.params.id = req.userData.id;
+  req.params.id = req.userData.id
   readUserModel(req.params.id, (err, data) => {
     if (err) {
       errorHandler(err, res)
@@ -21,16 +21,16 @@ exports.readProfile = (req, res) => {
 
 // Update
 exports.updateProfile = (req, res) => {
-  req.params.id = req.userData.id;
+  req.params.id = req.userData.id
   if (req.file) {
-    req.body.picture = req.file.filename;
-    readUserModel(req.params.id, (err, data) => {
+    req.body.picture = req.file.path
+    readUserModel(req.params.id, (_err, data) => {
       if (data.rows.length) {
-        const [user] = data.rows;
+        const [user] = data.rows
         if (user.picture) {
-          fs.rm('uploads/'+user.picture, {force: true}, (err) => {
+          fs.rm('uploads/' + user.picture, { force: true }, (err) => {
             if (err) {
-              return errorHandler(err, res);
+              return errorHandler(err, res)
             }
           })
         }
@@ -39,7 +39,7 @@ exports.updateProfile = (req, res) => {
   }
   updateUserModel(req.params.id, req.body, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     return res.status(200).json({
       success: true,
@@ -73,18 +73,18 @@ exports.createTransaction = (req, res) => {
     createTransactionModel(params, (err, dataTransaction) => {
       if (err) {
         console.log(err)
-        return errorHandler(err, res);
+        return errorHandler(err, res)
       }
-      const seatNum = req.body.seatNum;
-      const transactionId = dataTransaction.rows[0].id;
-      createReservedSeatModel({seatNum, transactionId}, (err, dataReservedSeat) => {
+      const seatNum = req.body.seatNum
+      const transactionId = dataTransaction.rows[0].id
+      createReservedSeatModel({ seatNum, transactionId }, (err, dataReservedSeat) => {
         if (err) {
-          return errorHandler(err, res);
+          return errorHandler(err, res)
         }
         return res.status(200).json({
           success: true,
           message: 'Create transaction successfully',
-          results: {transaction: dataTransaction.rows[0], reservedSeat: dataReservedSeat.rows}
+          results: { transaction: dataTransaction.rows[0], reservedSeat: dataReservedSeat.rows }
         })
       })
     })
@@ -106,7 +106,7 @@ exports.readTransactionById = (req, res) => {
   }
   readTransactionByIdModel(req.params.id, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     if (data.rows.length) {
       return res.status(200).json({
