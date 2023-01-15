@@ -3,8 +3,8 @@ const { google } = require('googleapis')
 const OAuth2 = google.auth.OAuth2
 
 const myOAuth2Client = new OAuth2(
-  '1083311390430-8qlhnrfgm879ok5t8thtq4844lf0l8pc.apps.googleusercontent.com',
-  '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',
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
   'https://developers.google.com/oauthplayground'
 )
 
@@ -17,8 +17,8 @@ exports.transport = nodemailer.createTransport({
   auth: {
     type: 'OAuth2',
     user: 'karcis.id@gmail.com', // your gmail account you used to set the project up in google cloud console"
-    clientId: '1083311390430-8qlhnrfgm879ok5t8thtq4844lf0l8pc.apps.googleusercontent.com',
-    clientSecret: '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',
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
     refreshToken: '1//04dUIyQx6ObogCgYIARAAGAQSNwF-L9IrJOmMPbNATx0OEc9BHEzOnxeBCojBEpYHIFbk-AAtfnlpdCOIbvr-gdD9QfQnCQBGL_c',
     accessToken: myAccessToken // access token variable we defined earlier
   }
