@@ -1,4 +1,4 @@
-const {createCinemaModel, readAllCinemasModel, countCinemasModel, readCinemaModel, updateCinemaModel, deleteCinemaModel} = require('../models/cinemas.model')
+const { createCinemaModel, readAllCinemasModel, countCinemasModel, readCinemaModel, updateCinemaModel, deleteCinemaModel } = require('../models/cinemas.model')
 const errorHandler = require('../helpers/errorHandler.helper')
 const filter = require('../helpers/filter.helper')
 
@@ -7,7 +7,7 @@ const filter = require('../helpers/filter.helper')
 exports.createCinema = (req, res) => {
   createCinemaModel(req.body, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     if (req.body.name === '') {
       return res.status(400).json({
@@ -36,13 +36,13 @@ exports.createCinema = (req, res) => {
 
 // Membaca semua data cinemas (Read)
 exports.readAllCinemas = (req, res) => {
-  const sortable = ['name', 'createdAt', 'updatedAt'];
-  const sortableBy = ['DESC', 'ASC'];
+  const sortable = ['name', 'createdAt', 'updatedAt']
+  const sortableBy = ['DESC', 'ASC']
   filter(req.query, sortable, sortableBy, countCinemasModel, res, (filter, pageInfo) => {
     readAllCinemasModel(filter, (err, data) => {
       if (err) {
         console.log(err)
-        return errorHandler(err, res);
+        return errorHandler(err, res)
       }
       return res.status(200).json({
         success: true,
@@ -59,12 +59,12 @@ exports.readCinema = (req, res) => {
   if (req.params.id === ':id') {
     return res.status(400).json({
       success: false,
-      message: `Cinema id is not filled yet`
+      message: 'Cinema id is not filled yet'
     })
   }
   readCinemaModel(req.params.id, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     if (data.rows.length) {
       return res.status(200).json({
@@ -86,12 +86,12 @@ exports.updateCinema = (req, res) => {
   if (req.params.id === ':id') {
     return res.status(400).json({
       success: false,
-      message: `Cinema id is not filled yet`
+      message: 'Cinema id is not filled yet'
     })
   }
   updateCinemaModel(req.params.id, req.body, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     if (data.rows.length) {
       return res.status(200).json({
@@ -113,12 +113,12 @@ exports.deleteCinema = (req, res) => {
   if (req.params.id === ':id') {
     return res.status(400).json({
       success: false,
-      message: `Cinema id is not filled yet`
+      message: 'Cinema id is not filled yet'
     })
   }
   deleteCinemaModel(req.params.id, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     if (data.rows.length) {
       return res.status(200).json({
