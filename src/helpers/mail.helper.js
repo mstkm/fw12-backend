@@ -28,7 +28,7 @@ exports.mailOptions = (sendTo, code) => {
   return {
     from: 'cloudymus@gmail.com', // sender
     to: sendTo, // receiver
-    subject: 'My tutorial brought me here', // Subject
+    subject: 'Karcis Reset Password', // Subject
     html: `<p>Here is your reset password code <b>${code}</b></p>`// html body
   }
 }
