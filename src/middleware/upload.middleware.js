@@ -23,7 +23,7 @@ cloudinary.config({
 // })
 
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
+  cloudinary,
   params: {
     folder: 'karcis',
     format: async (req, file) => file.originalname.split('.')[file.originalname.split('.').length - 1], // supports promises as well
@@ -32,9 +32,9 @@ const storage = new CloudinaryStorage({
       const ext = extension[extension.length - 1]
       const name = `${new Date().getDate()}_${new Date().getTime()}.${ext}`
       return name
-    },
-  },
-});
+    }
+  }
+})
 
 const fileFilter = (req, file, cb) => {
   console.log(file)
