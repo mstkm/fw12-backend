@@ -1,13 +1,13 @@
 const usersRouter = require('express').Router()
 const { readAllUsers, readUser, createUser, updateUser, deleteUser } = require('../controllers/users.controller')
 const uploadMiddleware = require('../middleware/upload.middleware')
-const {authMiddleware} = require('../middleware/auth.middleware')
+const { authMiddleware } = require('../middleware/auth.middleware')
 
 // Membuat data user (Create)
 usersRouter.post('/', authMiddleware, createUser) // menerima query string dan body
 
 // Membaca data user (Read)
-usersRouter.get('/', authMiddleware, readAllUsers) // menerima query string
+usersRouter.get('/', readAllUsers) // menerima query string
 // Membaca data user berdasarkan id (Read)
 usersRouter.get('/:id', authMiddleware, readUser) // menerima query string
 

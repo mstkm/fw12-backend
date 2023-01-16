@@ -10,14 +10,14 @@ exports.createUserModel = (data, cb) => {
 
 // Membaca data semua user (Read)
 exports.readAllUserModel = (filter, cb) => {
-  const sql = `SELECT * FROM users WHERE "firstName" LIKE $3 ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`
+  const sql = `SELECT users.id, users.email FROM users WHERE "email" LIKE $3 ORDER BY "${filter.sortBy}" ${filter.sort} LIMIT $1 OFFSET $2`
   const value = [filter.limit, filter.offset, `%${filter.search}%`]
   db.query(sql, value, cb)
 }
 
 // Menghitung total data users
 exports.countUsersModel = (filter, cb) => {
-  const sql = 'SELECT COUNT("firstName") AS "totalData" FROM users WHERE "firstName" LIKE $1'
+  const sql = 'SELECT COUNT("email") AS "totalData" FROM users WHERE "email" LIKE $1'
   const value = [`%${filter.search}%`]
   db.query(sql, value, cb)
 }
