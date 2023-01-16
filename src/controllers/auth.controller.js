@@ -158,7 +158,7 @@ exports.resetPassword = (req, res) => {
       } else {
         return res.status(400).json({
           success: false,
-          message: 'Reset request not found. Try send request again.'
+          message: 'Reset request not found. Check your email or send request again.'
         })
       }
     })
