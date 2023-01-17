@@ -1,4 +1,4 @@
-const {createMovieModel, readAllMoviesModel, countMoviesModel, readMovieModel, updateMovieModel, deleteMovieModel, upcomingModel, nowShowingModel, countNowShowingModel, countUpcomingModel} = require('../models/movies.model')
+const { createMovieModel, readAllMoviesModel, countMoviesModel, readMovieModel, updateMovieModel, deleteMovieModel, upcomingModel, nowShowingModel, countNowShowingModel, countUpcomingModel } = require('../models/movies.model')
 const errorHandler = require('../helpers/errorHandler.helper')
 const filter = require('../helpers/filter.helper')
 
@@ -13,7 +13,7 @@ exports.createMovie = (req, res) => {
   }
   createMovieModel(req.body, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     return res.status(200).json({
       success: true,
@@ -25,12 +25,12 @@ exports.createMovie = (req, res) => {
 
 // Membaca data movies (Read)
 exports.readAllMovies = (req, res) => {
-  const sortable = ['title', 'director', 'createdAt', 'updatedAt'];
-  const sortableBy = ['ASC', 'DESC'];
+  const sortable = ['title', 'director', 'createdAt', 'updatedAt']
+  const sortableBy = ['ASC', 'DESC']
   filter(req.query, sortable, sortableBy, countMoviesModel, res, (filter, pageInfo) => {
     readAllMoviesModel(filter, (err, data) => {
       if (err) {
-        return errorHandler(err, res);
+        return errorHandler(err, res)
       }
       return res.status(200).json({
         success: true,
@@ -52,7 +52,7 @@ exports.readMovie = (req, res) => {
   }
   readMovieModel(req.params.id, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     if (data.rows.length) {
       return res.status(200).json({
@@ -80,7 +80,7 @@ exports.updateMovie = (req, res) => {
   updateMovieModel(req.params.id, req.body, (err, data) => {
     if (err) {
       console.log(err)
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     if (data.rows.length) {
       return res.status(200).json({
@@ -107,7 +107,7 @@ exports.deleteMovie = (req, res) => {
   }
   deleteMovieModel(req.params.id, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
     if (data.rows.length) {
       return res.status(200).json({
@@ -128,11 +128,11 @@ exports.deleteMovie = (req, res) => {
 exports.nowShowing = (req, res) => {
   const sortable = ['title', 'startDate', 'endDate']
 
-  req.query.limit = parseInt(req.query.limit) || 5;
-  req.query.page = parseInt(req.query.page) || 1;
-  req.query.search = req.query.search || '';
-  req.query.sort = req.query.sort || 'ASC';
-  req.query.sortBy = (sortable.includes(req.query.sortBy) && req.query.sortBy) || 'startDate';
+  req.query.limit = parseInt(req.query.limit) || 5
+  req.query.page = parseInt(req.query.page) || 1
+  req.query.search = req.query.search || ''
+  req.query.sort = req.query.sort || 'ASC'
+  req.query.sortBy = (sortable.includes(req.query.sortBy) && req.query.sortBy) || 'startDate'
 
   const params = {
     limit: req.query.limit,
@@ -144,19 +144,19 @@ exports.nowShowing = (req, res) => {
 
   countNowShowingModel(req.query, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
-    const {totalData} = data.rows[0];
+    const { totalData } = data.rows[0]
     const pageInfo = {
       totalData: parseInt(totalData),
-      totalPage: Math.ceil(totalData/req.query.limit),
+      totalPage: Math.ceil(totalData / req.query.limit),
       page: req.query.page,
-      nextPage: req.query.page < Math.ceil(totalData/req.query.limit) ? req.query.page + 1 : null,
+      nextPage: req.query.page < Math.ceil(totalData / req.query.limit) ? req.query.page + 1 : null,
       prevPage: req.query.page > 1 ? req.query.page - 1 : null
     }
     nowShowingModel(params, (err, data) => {
       if (err) {
-        return errorHandler(err, res);
+        return errorHandler(err, res)
       }
       return res.status(200).json({
         success: true,
@@ -174,11 +174,11 @@ exports.upcoming = (req, res) => {
 
   req.query.month = req.query.month || new Date().getMonth() + 1
   req.query.year = req.query.year || new Date().getFullYear()
-  req.query.limit = parseInt(req.query.limit) || 5;
-  req.query.page = parseInt(req.query.page) || 1;
-  req.query.search = req.query.search || '';
-  req.query.sort = req.query.sort || 'ASC';
-  req.query.sortBy = (sortable.includes(req.query.sortBy) && req.query.sortBy) || 'releaseDate';
+  req.query.limit = parseInt(req.query.limit) || 5
+  req.query.page = parseInt(req.query.page) || 1
+  req.query.search = req.query.search || ''
+  req.query.sort = req.query.sort || 'ASC'
+  req.query.sortBy = (sortable.includes(req.query.sortBy) && req.query.sortBy) || 'releaseDate'
 
   const params = {
     month: req.query.month,
@@ -192,19 +192,19 @@ exports.upcoming = (req, res) => {
 
   countUpcomingModel(req.query, (err, data) => {
     if (err) {
-      return errorHandler(err, res);
+      return errorHandler(err, res)
     }
-    const {totalData} = data.rows[0];
+    const { totalData } = data.rows[0]
     const pageInfo = {
       totalData: parseInt(totalData),
-      totalPage: Math.ceil(totalData/req.query.limit),
+      totalPage: Math.ceil(totalData / req.query.limit),
       page: req.query.page,
-      nextPage: req.query.page < Math.ceil(totalData/req.query.limit) ? req.query.page + 1 : null,
+      nextPage: req.query.page < Math.ceil(totalData / req.query.limit) ? req.query.page + 1 : null,
       prevPage: req.query.page > 1 ? req.query.page - 1 : null
     }
     upcomingModel(params, (err, data) => {
       if (err) {
-        return errorHandler(err, res);
+        return errorHandler(err, res)
       }
       return res.status(200).json({
         success: true,
