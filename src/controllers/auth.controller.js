@@ -2,7 +2,7 @@ const { readUserByEmail, createUserModel, updateUserModel } = require('../models
 const { createResetPasswordModel, readResetPasswordByEmailAndCodeModel, deleteResetPasswordModel } = require('../models/resetPassword.model')
 const jwt = require('jsonwebtoken')
 const errorHandler = require('../helpers/errorHandler.helper')
-const { transport, mailOptions } = require('../helpers/mail.helper')
+// const { transport, mailOptions } = require('../helpers/mail.helper')
 
 exports.login = (req, res) => {
   if (req.body.email === '') {
@@ -95,7 +95,7 @@ exports.forgotPassword = (req, res) => {
       if (users.length) {
         const [user] = users
         const code = String(Math.round(Math.random() * 90000)).padEnd(6, '0')
-        await transport.sendMail(mailOptions(email, code))
+        // await transport.sendMail(mailOptions(email, code))
         const data = {
           email,
           userId: user.id,
