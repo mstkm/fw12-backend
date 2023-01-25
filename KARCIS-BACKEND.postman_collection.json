@@ -1,0 +1,2818 @@
+{
+	"info": {
+		"_postman_id": "013bfdec-7a68-45ee-b83a-836a16afad91",
+		"name": "KARCIS-BACKEND",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24729208"
+	},
+	"item": [
+		{
+			"name": "CASTS",
+			"item": [
+				{
+					"name": "CREATE CAST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/casts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"casts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL CASTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/casts?limit=1000&page=&search=&sort=&sortBy=",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"casts"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1000"
+								},
+								{
+									"key": "page",
+									"value": ""
+								},
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "sort",
+									"value": ""
+								},
+								{
+									"key": "sortBy",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ CAST",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/casts/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"casts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE CAST",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/casts/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"casts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE CAST",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/casts/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"casts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CINEMAS",
+			"item": [
+				{
+					"name": "CREATE CINEMA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "picture",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/cinemas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cinemas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL CINEMAS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cinemas?limit&page=&search=&sort=&sortBy=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cinemas"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": ""
+								},
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "sort",
+									"value": ""
+								},
+								{
+									"key": "sortBy",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ CINEMA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cinemas/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cinemas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE CINEMA",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "picture",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/cinemas/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cinemas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE CINEMA",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cinemas/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cinemas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GENRE",
+			"item": [
+				{
+					"name": "CREATE GENRE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/genre",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"genre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL GENRE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/genre?limit&page&search&sort=&sortBy",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"genre"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "search",
+									"value": null
+								},
+								{
+									"key": "sort",
+									"value": ""
+								},
+								{
+									"key": "sortBy",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ GENRE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/genre/:name",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"genre",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": "Action"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE GENRE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/genre/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"genre",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE GENRE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/genre/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"genre",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MOVIE CASTS",
+			"item": [
+				{
+					"name": "CREATE MOVIE CAST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "movieId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "castsId",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/movieCasts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieCasts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL MOVIE CASTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieCasts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieCasts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ MOVIE CAST",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieCasts/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieCasts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE MOVIE CAST",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "movieId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "castsId",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/movieCasts/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieCasts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE MOVIE CAST",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieCasts/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieCasts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MOVIE GENRE",
+			"item": [
+				{
+					"name": "CREATE MOVIE GENRE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "movieId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "genreId",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/movieGenre",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieGenre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL MOVIE GENRE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieGenre",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieGenre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ MOVIE GENRE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieGenre/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieGenre",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE MOVIE GENRE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "movieId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "genreId",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/movieGenre/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieGenre",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "26"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE MOVIE GENRE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieGenre/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieGenre",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MOVIE SCHEDULE",
+			"item": [
+				{
+					"name": "CREATE MOVIE SCHEDULE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "movieId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "cinemaId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "30000",
+									"type": "text"
+								},
+								{
+									"key": "startDate",
+									"value": "2022-12-01",
+									"type": "text"
+								},
+								{
+									"key": "endDate",
+									"value": "2023-03-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/movieSchedule",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movieSchedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL MOVIE SCHEDULE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/movieSchedule",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movieSchedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ MOVIE SCHEDULE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieSchedule/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieSchedule",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE MOVIE SCHEDULE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieSchedule/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieSchedule",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE MOVIE SCHEDULE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieSchedule/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieSchedule",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ LIST MOVIE SCHEDULE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/movieSchedule/listMovieSChedule/:id/:city/:date",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movieSchedule",
+								"listMovieSChedule",
+								":id",
+								":city",
+								":date"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								},
+								{
+									"key": "city",
+									"value": "Purwokerto"
+								},
+								{
+									"key": "date",
+									"value": "2023-01-20"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MOVIE SCHEDULE TIMES",
+			"item": [
+				{
+					"name": "CREATE MOVIE SCHEDULE TIME",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "time",
+									"value": "10:00",
+									"type": "text"
+								},
+								{
+									"key": "movieScheduleId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/movieScheduleTimes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieScheduleTimes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL SCHEDULE TIMES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieScheduleTimes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieScheduleTimes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ SCHEDULE TIME",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieScheduleTimes/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieScheduleTimes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE SCHEDULE TIME",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieScheduleTimes/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieScheduleTimes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE SCHEDULE TIME",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movieScheduleTimes/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movieScheduleTimes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MOVIES",
+			"item": [
+				{
+					"name": "CREATE MOVIE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Postman",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "releaseDate",
+									"value": "2022-08-17",
+									"type": "text"
+								},
+								{
+									"key": "director",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "02:00",
+									"type": "text"
+								},
+								{
+									"key": "synopsis",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/movies",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL MOVIES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/movies?limit=8&page&search&sort&sortBy",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movies"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "8"
+								},
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "search",
+									"value": null
+								},
+								{
+									"key": "sort",
+									"value": null
+								},
+								{
+									"key": "sortBy",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ MOVIE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/movies/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE MOVIE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/movies/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE MOVIE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/movies/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NOW SHOWING MOVIES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/movies/nowShowing?limit=&page=&search&sort&sortBy=title&month",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movies",
+								"nowShowing"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": ""
+								},
+								{
+									"key": "search",
+									"value": null
+								},
+								{
+									"key": "sort",
+									"value": null
+								},
+								{
+									"key": "sortBy",
+									"value": "title"
+								},
+								{
+									"key": "month",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPCOMING MOVIES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/movies/upcoming?month=&year&limit&page&search&sort&sortBy",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movies",
+								"upcoming"
+							],
+							"query": [
+								{
+									"key": "month",
+									"value": ""
+								},
+								{
+									"key": "year",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "search",
+									"value": null
+								},
+								{
+									"key": "sort",
+									"value": null
+								},
+								{
+									"key": "sortBy",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PAYMENT METHOD",
+			"item": [
+				{
+					"name": "CREATE PAYMENT METHOD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "picture",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "postman",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/paymentMethod",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"paymentMethod"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL PAYMENT METHOD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/paymentMethod?limit&page&search&sort&sortBy",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"paymentMethod"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "search",
+									"value": null
+								},
+								{
+									"key": "sort",
+									"value": null
+								},
+								{
+									"key": "sortBy",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ PAYMENT METHOD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/paymentMethod/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"paymentMethod",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE PAYMENT METHOD",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/paymentMethod/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"paymentMethod",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE PAYMENT METHOD",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/paymentMethod/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"paymentMethod",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RESERVED SEAT",
+			"item": [
+				{
+					"name": "CREATE RESERVED SEAT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "seatNum",
+									"value": "A1, A2",
+									"type": "text"
+								},
+								{
+									"key": "transactionId",
+									"value": "91",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/reservedSeat",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reservedSeat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL RESERVED SEAT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/reservedSeat",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reservedSeat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ RESERVED SEAT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/reservedSeat/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reservedSeat",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE RESERVED SEAT",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/reservedSeat/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reservedSeat",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE RESERVED SEAT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/reservedSeat/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reservedSeat",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RESET PASSWORD",
+			"item": [
+				{
+					"name": "CREATE RESET PASSWORD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "aaa@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/resetPassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL RESET PASSWORD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/resetPassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ RESET PASSWORD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/resetPassword/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"resetPassword",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE RESET PASSWORD",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/resetPassword/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"resetPassword",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE RESET PASSWORD",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/resetPassword/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"resetPassword",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "54"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "STATUS",
+			"item": [
+				{
+					"name": "CREATE STATUS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nama",
+									"value": "Postman",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL STATUS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ STATUS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/status/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"status",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE STATUS",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/status/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"status",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE STATUS",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/status/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"status",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SUBSCRIBERS",
+			"item": [
+				{
+					"name": "CREATE SUBSCRIBER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "new@mail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/subscribers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subscribers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL SUBSCRIBERS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/subscribers?limit&page&search&sort&sortBy",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subscribers"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "search",
+									"value": null
+								},
+								{
+									"key": "sort",
+									"value": null
+								},
+								{
+									"key": "sortBy",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ SUBSCRIBER",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/subscribers/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subscribers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE SUBSCRIBER",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/subscribers/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subscribers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE SUBSCRIBER",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/subscribers/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subscribers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TRANSACTIONS",
+			"item": [
+				{
+					"name": "CREATE  TRANSACTION",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "bookingDate",
+									"value": "2022-12-09",
+									"type": "text"
+								},
+								{
+									"key": "movieId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "cinemaId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "movieScheduleId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "fullName",
+									"value": "User",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "user@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "08123456789",
+									"type": "text"
+								},
+								{
+									"key": "statusId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "paymentMethodId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/transactions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL TRANSACTIONS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/transactions?limit&page&search&sort&sortBy",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "search",
+									"value": null
+								},
+								{
+									"key": "sort",
+									"value": null
+								},
+								{
+									"key": "sortBy",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ TRANSACTION",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/transactions/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"transactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "46"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE TRANSACTION",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "bookingDate",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "movieId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "cinemaId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "movieScheduleId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "fullName",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "statusId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "paymentMethodId",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/transactions/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"transactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE TRANSACTION",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/transactions/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"transactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "92"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USERS",
+			"item": [
+				{
+					"name": "CREATE USER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "picture",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "firstName",
+									"value": "New",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "0812345678",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "new123@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL USERS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users?limit&page&search&sort&sortBy=id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "search",
+									"value": null
+								},
+								{
+									"key": "sort",
+									"value": null
+								},
+								{
+									"key": "sortBy",
+									"value": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ USER",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE USER",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "Vk39QbH79/coding-gba2b1442c_1920.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/users/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USER",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "23"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "rokas52849@fandua.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "User12345??",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REGISTER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "User",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "New",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "08123456789",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "user03@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "User123??",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FORGOT PASSWORD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "rokas52849@fandua.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/forgotPassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RESET PASSWORD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "615370",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "rokas52849@fandua.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "User12345??",
+									"type": "text"
+								},
+								{
+									"key": "confirmPassword",
+									"value": "User12345??",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/resetPassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PROFILE",
+			"item": [
+				{
+					"name": "READ PROFILE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE PROFILE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "ArgSNpSfF/coding-gba2b1442c_1920.jpg",
+									"disabled": true
+								},
+								{
+									"key": "firstName",
+									"value": "User 09",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "user09@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "08123456789",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "User12345?",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/profile/update",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"profile",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE TRANSACTION",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "bookingDate",
+									"value": "2023-01-28",
+									"type": "text"
+								},
+								{
+									"key": "movieId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "cinemaId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "movieScheduleId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "fullName",
+									"value": "Admin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "081232389",
+									"type": "text"
+								},
+								{
+									"key": "paymentMethodId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "statusId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "seatNum",
+									"value": "A1, A2, A3, A4",
+									"type": "text"
+								},
+								{
+									"key": "bookingTime",
+									"value": "08:00",
+									"type": "text"
+								},
+								{
+									"key": "cinemaName",
+									"value": "ebv.id",
+									"type": "text"
+								},
+								{
+									"key": "cinemaPicture",
+									"value": "Cinema Picture",
+									"type": "text"
+								},
+								{
+									"key": "movieTitle",
+									"value": "Tenet",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/profile/transaction",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"profile",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ TRANSACTION BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/profile/transaction/details/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"profile",
+								"transaction",
+								"details",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "76"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
