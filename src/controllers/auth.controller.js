@@ -1,6 +1,7 @@
 const { readUserByEmail, createUserModel, updateUserModel } = require('../models/users.model')
 const { createResetPasswordModel, readResetPasswordByEmailAndCodeModel, deleteResetPasswordModel } = require('../models/resetPassword.model')
 const jwt = require('jsonwebtoken')
+const argon = require('argon2')
 const errorHandler = require('../helpers/errorHandler.helper')
 const { transport, mailOptions } = require('../helpers/mail.helper')
 
@@ -17,10 +18,10 @@ exports.login = (req, res) => {
       message: 'Password cannot be empty'
     })
   }
-  readUserByEmail(req.body.email, (_err, { rows }) => {
+  readUserByEmail(req.body.email, async (_err, { rows }) => {
     if (rows.length) {
       const [user] = rows
-      if (req.body.password === user.password) {
+      if (await argon.verify(user.password, req.body.password)) {
         const token = jwt.sign({ id: user.id, role: user.role }, 'backend-secret')
         return res.status(200).json({
           success: true,
@@ -38,51 +39,56 @@ exports.login = (req, res) => {
   })
 }
 
-exports.register = (req, res) => {
-  if (req.body.firstName === '') {
-    return res.status(400).json({
-      success: false,
-      message: 'First name cannot be empty'
-    })
-  }
-  if (req.body.phoneNumber === '') {
-    return res.status(400).json({
-      success: false,
-      message: 'Phone number cannot be empty'
-    })
-  }
-  if (req.body.email === '') {
-    return res.status(400).json({
-      success: false,
-      message: 'Email cannot be empty'
-    })
-  }
-  if (req.body.password === '') {
-    return res.status(400).json({
-      success: false,
-      message: 'Password cannot be empty'
-    })
-  }
-  createUserModel(req.body, (err, data) => {
-    if (err) {
-      return errorHandler(err, res)
+exports.register = async (req, res) => {
+  try {
+    if (req.body.firstName === '') {
+      return res.status(400).json({
+        success: false,
+        message: 'First name cannot be empty'
+      })
     }
-    readUserByEmail(req.body.email, (_err, { rows }) => {
-      if (rows.length) {
-        const [user] = rows
-        if (req.body.password === user.password) {
-          const token = jwt.sign({ id: user.id, role: user.role }, 'backend-secret')
-          return res.status(200).json({
-            success: true,
-            message: 'Register success',
-            results: {
-              token
-            }
-          })
-        }
+    if (req.body.phoneNumber === '') {
+      return res.status(400).json({
+        success: false,
+        message: 'Phone number cannot be empty'
+      })
+    }
+    if (req.body.email === '') {
+      return res.status(400).json({
+        success: false,
+        message: 'Email cannot be empty'
+      })
+    }
+    if (req.body.password === '') {
+      return res.status(400).json({
+        success: false,
+        message: 'Password cannot be empty'
+      })
+    }
+    req.body.password = await argon.hash(req.body.password)
+    createUserModel(req.body, (err, data) => {
+      if (err) {
+        return errorHandler(err, res)
       }
+      readUserByEmail(req.body.email, (_err, { rows }) => {
+        if (rows.length) {
+          const [user] = rows
+          if (req.body.password === user.password) {
+            const token = jwt.sign({ id: user.id, role: user.role }, 'backend-secret')
+            return res.status(200).json({
+              success: true,
+              message: 'Register success',
+              results: {
+                token
+              }
+            })
+          }
+        }
+      })
     })
-  })
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 exports.forgotPassword = (req, res) => {
@@ -126,9 +132,9 @@ exports.forgotPassword = (req, res) => {
 }
 
 exports.resetPassword = (req, res) => {
-  const { password, confirmPassword } = req.body
+  let { password, confirmPassword } = req.body
   if (password === confirmPassword) {
-    readResetPasswordByEmailAndCodeModel(req.body, (err, data) => {
+    readResetPasswordByEmailAndCodeModel(req.body, async (err, data) => {
       const { rows } = data
       const [resetRequest] = rows
       if (err) {
@@ -143,6 +149,8 @@ exports.resetPassword = (req, res) => {
             })
           })
         } else {
+          password = await argon.hash(req.body.password)
+          console.log(password)
           updateUserModel(resetRequest.userId, { password }, (err, data) => {
             if (err) {
               errorHandler(err, res)
