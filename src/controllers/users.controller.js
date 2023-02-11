@@ -91,45 +91,51 @@ exports.readUser = (req, res) => {
 
 // Mengupdate data user (Update)
 exports.updateUser = async (req, res) => {
-  if (req.file) {
-    req.body.picture = req.file.filename
-    readUserModel(req.params.id, (_err, data) => {
-      if (data.rows.length) {
-        const [user] = data.rows
-        if (user.picture) {
-          fs.rm('uploads/' + user.picture, { force: true }, (err) => {
-            if (err) {
-              return errorHandler(err, res)
-            }
-          })
+  try {
+    if (req.file) {
+      req.body.picture = req.file.filename
+      readUserModel(req.params.id, (_err, data) => {
+        if (data.rows.length) {
+          const [user] = data.rows
+          if (user.picture) {
+            fs.rm('uploads/' + user.picture, { force: true }, (err) => {
+              if (err) {
+                return errorHandler(err, res)
+              }
+            })
+          }
         }
-      }
-    })
-  }
-  if (req.params.id === ':id') {
-    return res.status(400).json({
-      success: false,
-      message: 'User id is not filled yet'
-    })
-  }
-  req.body.password = await argon.hash(req.body.password)
-  updateUserModel(req.params.id, req.body, (err, data) => {
-    if (err) {
-      return errorHandler(err, res)
-    }
-    if (data.rows.length) {
-      return res.status(200).json({
-        success: true,
-        message: 'User update successfully',
-        results: data.rows[0]
       })
-    } else {
+    }
+    if (req.params.id === ':id') {
       return res.status(400).json({
         success: false,
-        message: `User id ${req.params.id} doesn't exist`
+        message: 'User id is not filled yet'
       })
     }
-  })
+    req.body.password = req.body.password || ''
+    console.log(req.body.password)
+    req.body.password = await argon.hash(req.body.password)
+    updateUserModel(req.params.id, req.body, (err, data) => {
+      if (err) {
+        return errorHandler(err, res)
+      }
+      if (data.rows.length) {
+        return res.status(200).json({
+          success: true,
+          message: 'User update successfully',
+          results: data.rows[0]
+        })
+      } else {
+        return res.status(400).json({
+          success: false,
+          message: `User id ${req.params.id} doesn't exist`
+        })
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 // Menghapus data user (Delete)
