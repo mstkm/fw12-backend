@@ -114,7 +114,6 @@ exports.updateUser = async (req, res) => {
       })
     }
     req.body.password = req.body.password || ''
-    console.log(req.body.password)
     req.body.password = await argon.hash(req.body.password)
     updateUserModel(req.params.id, req.body, (err, data) => {
       if (err) {
