@@ -7,19 +7,19 @@
 </div>
 
 
-## Daftar isi
-- [Deskripsi](#deskripsi)
-- [Dibuat dengan](#dibuat-dengan)
-- [Teknologi](#teknologi)
+## Table of contents
+- [Descriptions](#descrptions)
+- [Built with](#built-with)
+- [Technologies](#technologies)
 - [ENV Example](#env-example)
 - [Main End Point](#main-end-point)
 
 
 ##  Description
-Aplikasi backend untuk repo **fw12-frontend**
+Backend application for **fw12-frontend** repository
 
 
-## Dibuat dengan
+## Built with
 ![Express](https://img.shields.io/badge/Express-v4.18.2-pink?style=flat)
 ![Cors](https://img.shields.io/badge/cors-v2.8.5-green?style=flat)
 ![Argon2](https://img.shields.io/badge/argon2-v0.30.2-blue?style=flat)
@@ -66,12 +66,12 @@ REFRESH_TOKEN =
 |---|------|----|
 |/auth/login|POST|login|
 |/auth/register|POST|registrasi|
-|/auth/forgotPassword|POST|jika lupa password|
+|/auth/forgotPassword|POST|if forgot password|
 |/auth/resetPassword|POST|reset password |
-|/movies?limit&page&search&sort&sortBy|GET|mendapatkan semua movie dengan limit default 5 movie|
-|/movies/nowShowing?limit=&page=&search&sort&sortBy=title&month|GET|mendapatkan semua movie yang sedang tayang dengan limit default 5 movie|
-|/movies/upcoming?month=&year&limit&page&search&sort&sortBy|GET|mendapatkan semua movie berdasarkan bulan release dengan limit default 5 movie|
-|/profile/transaction|POST|membuat transaksi|
+|/movies?limit&page&search&sort&sortBy|GET|get all movies with a default limit of 5 movies
+|/movies/nowShowing?limit=&page=&search&sort&sortBy=title&month|GET|get all the movies that are currently showing with a default limit of 5 movies|
+|/movies/upcoming?month=&year&limit&page&search&sort&sortBy|GET|get all movies based on the month of release with a default limit of 5 movies|
+|/profile/transaction|POST|make transactions|
 
 
 
